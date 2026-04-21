@@ -1,4 +1,5 @@
-import { Grid2x2 as Grid, Users, Maximize2, ArrowRight } from 'lucide-react';
+import { useState } from 'react';
+import { Grid2x2 as Grid, Users, Maximize2, ArrowRight, X } from 'lucide-react';
 import PageHero from '../components/PageHero';
 import SectionHeader from '../components/SectionHeader';
 import StatGrid from '../components/StatGrid';
@@ -124,6 +125,12 @@ const campusGallery = [
 ];
 
 export default function Campus() {
+  const [selectedImage, setSelectedImage] = useState<null | {
+    title: string;
+    desc: string;
+    src: string;
+  }>(null);
+
   return (
     <div className="page-enter">
       <PageHero
@@ -198,23 +205,44 @@ export default function Campus() {
         <SectionHeader
           tag="Galerie du campus"
           title="Quatre vues pour comprendre La Ruche"
-          subtitle="Remplace simplement les liens ci-dessous par tes rendus du campus."
+          subtitle="Clique sur une image pour l’agrandir."
           centered
         />
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1rem' }}>
+
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(420px, 1fr))',
+            gap: '1.5rem',
+          }}
+        >
           {campusGallery.map((img, i) => (
-            <div
+            <button
               key={i}
+              onClick={() => setSelectedImage(img)}
               style={{
                 background: '#0F1A0B',
                 border: '1px solid rgba(245,158,11,0.1)',
-                borderRadius: '12px',
+                borderRadius: '14px',
                 overflow: 'hidden',
+                padding: 0,
+                textAlign: 'left',
+                cursor: 'pointer',
+                transition: 'transform 0.2s ease, border-color 0.2s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-4px)';
+                e.currentTarget.style.borderColor = 'rgba(245,158,11,0.28)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.borderColor = 'rgba(245,158,11,0.1)';
               }}
             >
               <div
                 style={{
-                  aspectRatio: '4 / 3',
+                  position: 'relative',
+                  aspectRatio: '16 / 10',
                   background: '#111A0F',
                   borderBottom: '1px solid rgba(245,158,11,0.08)',
                 }}
@@ -229,16 +257,35 @@ export default function Campus() {
                     display: 'block',
                   }}
                 />
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: '0.85rem',
+                    right: '0.85rem',
+                    width: 38,
+                    height: 38,
+                    borderRadius: '999px',
+                    background: 'rgba(10,18,8,0.72)',
+                    border: '1px solid rgba(255,255,255,0.08)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#F0FDF4',
+                    backdropFilter: 'blur(6px)',
+                  }}
+                >
+                  <Maximize2 size={16} />
+                </div>
               </div>
-              <div style={{ padding: '1rem' }}>
-                <div style={{ color: '#F0FDF4', fontWeight: 700, fontSize: '0.9rem', marginBottom: '0.35rem' }}>
+              <div style={{ padding: '1.1rem 1.15rem 1.2rem' }}>
+                <div style={{ color: '#F0FDF4', fontWeight: 700, fontSize: '1rem', marginBottom: '0.35rem' }}>
                   {img.title}
                 </div>
-                <div style={{ color: '#A7C9A0', fontSize: '0.82rem', lineHeight: 1.6 }}>
+                <div style={{ color: '#A7C9A0', fontSize: '0.86rem', lineHeight: 1.6 }}>
                   {img.desc}
                 </div>
               </div>
-            </div>
+            </button>
           ))}
         </div>
       </section>
@@ -378,6 +425,92 @@ export default function Campus() {
           </button>
         </div>
       </section>
+
+      {selectedImage && (
+        <div
+          onClick={() => setSelectedImage(null)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(0,0,0,0.82)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '2rem',
+            zIndex: 9999,
+            backdropFilter: 'blur(4px)',
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              width: 'min(1200px, 96vw)',
+              maxHeight: '92vh',
+              background: '#0F1A0B',
+              border: '1px solid rgba(245,158,11,0.18)',
+              borderRadius: '16px',
+              overflow: 'hidden',
+              boxShadow: '0 24px 80px rgba(0,0,0,0.45)',
+            }}
+          >
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: '1rem',
+                padding: '1rem 1.1rem',
+                borderBottom: '1px solid rgba(245,158,11,0.08)',
+              }}
+            >
+              <div>
+                <div style={{ color: '#F0FDF4', fontWeight: 700, fontSize: '1rem', marginBottom: '0.2rem' }}>
+                  {selectedImage.title}
+                </div>
+                <div style={{ color: '#A7C9A0', fontSize: '0.82rem' }}>
+                  {selectedImage.desc}
+                </div>
+              </div>
+              <button
+                onClick={() => setSelectedImage(null)}
+                style={{
+                  width: 40,
+                  height: 40,
+                  borderRadius: '999px',
+                  border: '1px solid rgba(245,158,11,0.15)',
+                  background: 'rgba(245,158,11,0.06)',
+                  color: '#F0FDF4',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  flexShrink: 0,
+                }}
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            <div
+              style={{
+                background: '#111A0F',
+                maxHeight: 'calc(92vh - 84px)',
+                overflow: 'auto',
+              }}
+            >
+              <img
+                src={selectedImage.src}
+                alt={selectedImage.title}
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  display: 'block',
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
