@@ -67,12 +67,12 @@ const rentModels = [
 ];
 
 const roi = [
-  { year: 'Année 1', occupancy: 85, cashflow: '+140 k€', roi: '1,4%' },
-  { year: 'Année 2', occupancy: 92, cashflow: '+425 k€', roi: '4,3%' },
-  { year: 'Année 3', occupancy: 95, cashflow: '+1 275 k€', roi: '12,8%' },
-  { year: 'Année 4', occupancy: 95, cashflow: '+3 125 k€', roi: '31,3%' },
-  { year: 'Année 5', occupancy: 96, cashflow: '+6 100 k€', roi: '61,0%' },
-  { year: 'Année 6', occupancy: 96, cashflow: '+9 750 k€', roi: '97,5%' },
+  { year: 'Année 1', occupancy: 1 (pilote), cashflow: '+140 k€', roi: '1,4%' },
+  { year: 'Année 2', occupancy: 3, cashflow: '+425 k€', roi: '4,3%' },
+  { year: 'Année 3', occupancy: 10, cashflow: '+1 275 k€', roi: '12,8%' },
+  { year: 'Année 4', occupancy: 20, cashflow: '+3 125 k€', roi: '31,3%' },
+  { year: 'Année 5', occupancy: 32, cashflow: '+6 100 k€', roi: '61,0%' },
+  { year: 'Année 6', occupancy: 39, cashflow: '+9 750 k€', roi: '97,5%' },
 ];
 
 const investorTypes = [
@@ -287,7 +287,7 @@ export default function Financier() {
             <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: '600px' }}>
               <thead>
                 <tr style={{ borderBottom: '1px solid rgba(245,158,11,0.08)' }}>
-                  {['Année', 'Taux d’occupation', 'Marge cumulée', 'Valorisation potentielle'].map((h) => (
+                  {['Année', 'Modules vendus', 'Marge cumulée', 'Valorisation potentielle'].map((h) => (
                     <th
                       key={h}
                       style={{
