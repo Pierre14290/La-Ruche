@@ -239,8 +239,8 @@ export default function Home({ onNavigate }: HomeProps) {
       <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1.5rem 5rem' }}>
         <StatGrid
           stats={[
-            { value: '~40%', label: 'Moins cher', sub: 'vs. résidence classique', color: 'amber' },
-            { value: '6–8 sem.', label: 'Installation complète', sub: 'pour 50 logements', color: 'green' },
+            { value: '~43%', label: 'Moins cher', sub: 'vs. résidence classique', color: 'amber' },
+            { value: '18 jours.', label: 'Installation complète', sub: 'pour 40 logements', color: 'green' },
             { value: '-60%', label: 'CO₂ en phase chantier', sub: 'vs. construction neuve', color: 'amber' },
             { value: '100%', label: 'Démontable', sub: 'et relocalisable', color: 'green' },
           ]}
