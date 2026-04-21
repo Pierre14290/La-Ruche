@@ -16,7 +16,7 @@ const capexComparison = [
       { item: 'Transport + montage', pct: 11 },
       { item: 'Ingénierie, imprévus, frais', pct: 11 },
     ],
-    timeline: '10 j / module (18 j bruts)',
+    timeline: '10 j ouvrés / module (18 j ouvrés bruts)',
     perUnit: '~23,8 k€/logement',
   },
   {
