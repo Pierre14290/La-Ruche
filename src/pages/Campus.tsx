@@ -104,22 +104,22 @@ const campusGallery = [
   {
     title: 'Vue aérienne du campus',
     desc: 'Implantation générale des modules et des patios',
-    src: 'LIEN_IMAGE_1',
+    src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1776763929/21-04-2026_10-52-53_iujmzw.png',
   },
   {
     title: 'Cœur de vie commun',
     desc: 'Espaces partagés, circulation et convivialité',
-    src: 'LIEN_IMAGE_2',
+    src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1776763929/21-04-2026_10-52-27_orw65a.png',
   },
   {
     title: 'Module logement type',
     desc: 'Exemple de composition standard sur 4 niveaux',
-    src: 'LIEN_IMAGE_3',
+    src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1776763929/21-04-2026_10-53-14_z5jfk0.png',
   },
   {
     title: 'Extension du campus',
     desc: 'Ajout progressif de modules sur la trame hexagonale',
-    src: 'LIEN_IMAGE_4',
+    src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1776763929/21-04-2026_10-53-04_wrwiaa.png',
   },
 ];
 
