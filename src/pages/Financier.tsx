@@ -67,7 +67,7 @@ const rentModels = [
 ];
 
 const roi = [
-  { year: 'Année 1', occupancy: 1 (pilote), cashflow: '+140 k€', roi: '1,4%' },
+  { year: 'Année 1', occupancy: 1, cashflow: '+140 k€', roi: '1,4%' },
   { year: 'Année 2', occupancy: 3, cashflow: '+425 k€', roi: '4,3%' },
   { year: 'Année 3', occupancy: 10, cashflow: '+1 275 k€', roi: '12,8%' },
   { year: 'Année 4', occupancy: 20, cashflow: '+3 125 k€', roi: '31,3%' },
