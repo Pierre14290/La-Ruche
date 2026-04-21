@@ -5,20 +5,20 @@ import StatGrid from '../components/StatGrid';
 
 const capexComparison = [
   {
-    name: 'La Ruche (50 logements)',
-    total: '~2,5 M€',
+    name: 'La Ruche (40 logements)',
+    total: '~700 k€',
     breakdown: [
       { item: 'Conteneurs + transformation', pct: 35 },
       { item: 'Modules non-logement', pct: 25 },
       { item: 'Infrastructure + VRD', pct: 20 },
       { item: 'Contingences & frais', pct: 20 },
     ],
-    timeline: '6–8 semaines',
-    perUnit: '~50 k€/logement',
+    timeline: '3 semaines',
+    perUnit: '~17.5 k€/logement',
   },
   {
-    name: 'Résidence classique (50 logements)',
-    total: '~5,0 M€',
+    name: 'Résidence classique (40 logements)',
+    total: '~4,0 M€',
     breakdown: [
       { item: 'Gros œuvre béton', pct: 40 },
       { item: 'Second œuvre & équipements', pct: 30 },
