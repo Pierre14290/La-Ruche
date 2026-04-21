@@ -313,7 +313,7 @@ export default function Financier() {
                       {row.year}
                     </td>
                     <td style={{ padding: '1rem 1.5rem', color: '#A7C9A0', fontSize: '0.9rem' }}>
-                      {row.occupancy}%
+                      {row.occupancy}
                     </td>
                     <td style={{ padding: '1rem 1.5rem', color: '#4ADE80', fontSize: '0.9rem', fontWeight: 700 }}>
                       {row.cashflow}
