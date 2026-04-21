@@ -5,126 +5,131 @@ import StatGrid from '../components/StatGrid';
 
 const capexComparison = [
   {
-    name: 'La Ruche (40 logements)',
-    total: '~700 k€',
+    name: 'La Ruche (1 module / 40 logements)',
+    total: '~950 k€',
     breakdown: [
-      { item: 'Conteneurs + transformation', pct: 35 },
-      { item: 'Modules non-logement', pct: 25 },
-      { item: 'Infrastructure + VRD', pct: 20 },
-      { item: 'Contingences & frais', pct: 20 },
+      { item: 'Conteneurs + transformation + isolation', pct: 27 },
+      { item: 'Dalles bois + structures porteuses', pct: 19 },
+      { item: 'Électricité, VMC, plomberie', pct: 10 },
+      { item: 'PAC + ECS + technique', pct: 4 },
+      { item: 'Champ PV + batteries + électronique', pct: 18 },
+      { item: 'Transport + montage', pct: 11 },
+      { item: 'Ingénierie, imprévus, frais', pct: 11 },
     ],
-    timeline: '3 semaines',
-    perUnit: '~17.5 k€/logement',
+    timeline: '10 j / module (18 j bruts)',
+    perUnit: '~23,8 k€/logement',
   },
   {
-    name: 'Résidence classique (40 logements)',
+    name: 'Résidence étudiante classique (40 logements)',
     total: '~4,0 M€',
     breakdown: [
-      { item: 'Gros œuvre béton', pct: 40 },
+      { item: 'Gros œuvre / structure', pct: 38 },
       { item: 'Second œuvre & équipements', pct: 30 },
-      { item: 'Infrastructure + VRD', pct: 20 },
-      { item: 'Contingences & frais', pct: 10 },
+      { item: 'Infrastructure + VRD', pct: 18 },
+      { item: 'Études, imprévus, frais', pct: 14 },
     ],
-    timeline: '3–5 ans',
+    timeline: '18–24 mois',
     perUnit: '~100 k€/logement',
   },
 ];
 
 const opexBreakdown = [
-  { item: 'Électricité & chauffage', pct: 35, color: '#FBBF24' },
-  { item: 'Eau & assainissement', pct: 15, color: '#60A5FA' },
-  { item: 'Maintenance & réparations', pct: 20, color: '#F87171' },
-  { item: 'Nettoyage & hygiène', pct: 15, color: '#A78BFA' },
-  { item: 'Gestion administrative', pct: 10, color: '#4ADE80' },
-  { item: 'Assurance & taxes', pct: 5, color: '#FB923C' },
+  { item: 'Électricité résiduelle & PAC', pct: 28, color: '#FBBF24' },
+  { item: 'Eau & assainissement', pct: 14, color: '#60A5FA' },
+  { item: 'Maintenance & réparations', pct: 22, color: '#F87171' },
+  { item: 'Nettoyage & hygiène', pct: 12, color: '#A78BFA' },
+  { item: 'Gestion / exploitation', pct: 14, color: '#4ADE80' },
+  { item: 'Assurance & taxes', pct: 10, color: '#FB923C' },
 ];
 
 const rentModels = [
   {
-    tier: 'T1 compact (18 m²)',
-    baseRent: '280–320€',
-    utilities: '+80€',
+    tier: 'Studio compact partagé',
+    baseRent: '310–330€',
+    utilities: '+50–70€',
     total: '360–400€',
-    target: 'Étudiants boursiers, alternants',
+    target: 'Étudiants boursiers, mobilité courte',
   },
   {
-    tier: 'T1 standard (26 m²)',
-    baseRent: '350–400€',
-    utilities: '+100€',
-    total: '450–500€',
-    target: 'Étudiants en mobilité, doctorants',
+    tier: 'Studio standard',
+    baseRent: '330–350€',
+    utilities: '+50€',
+    total: '380–400€',
+    target: 'Étudiants en cursus classique',
   },
   {
-    tier: 'T1+ premium (30 m²)',
-    baseRent: '420–480€',
-    utilities: '+120€',
-    total: '540–600€',
-    target: 'Chercheurs, alternants bien rémunérés',
+    tier: 'Coliving / logement mutualisé',
+    baseRent: '290–320€',
+    utilities: '+50–60€',
+    total: '340–380€',
+    target: 'Étudiants recherchant le coût minimal',
   },
 ];
 
 const roi = [
-  { year: 'Année 1', occupancy: 85, cashflow: '+180 k€', roi: '7%' },
-  { year: 'Année 3', occupancy: 95, cashflow: '+450 k€', roi: '18%' },
-  { year: 'Année 5', occupancy: 98, cashflow: '+750 k€', roi: '30%' },
-  { year: 'Année 10', occupancy: 98, cashflow: '+1 600 k€', roi: '64%' },
+  { year: 'Année 1', occupancy: 85, cashflow: '+140 k€', roi: '1,4%' },
+  { year: 'Année 2', occupancy: 92, cashflow: '+425 k€', roi: '4,3%' },
+  { year: 'Année 3', occupancy: 95, cashflow: '+1 275 k€', roi: '12,8%' },
+  { year: 'Année 4', occupancy: 95, cashflow: '+3 125 k€', roi: '31,3%' },
+  { year: 'Année 5', occupancy: 96, cashflow: '+6 100 k€', roi: '61,0%' },
+  { year: 'Année 6', occupancy: 96, cashflow: '+9 750 k€', roi: '97,5%' },
 ];
 
 const investorTypes = [
   {
     icon: '🏛️',
-    type: 'Collectivités territoriales',
-    incentive: 'Réponse urgente à la crise du logement, amortissement sur 20–25 ans, impact social direct.',
-    roi: 'Modéré (4–6%)',
+    type: 'Collectivités / établissements publics',
+    incentive: 'Réponse rapide à la pénurie de logements étudiants, déploiement court, impact territorial immédiat.',
+    roi: 'Impact prioritaire',
     risk: 'Faible',
   },
   {
-    icon: '🏦',
-    type: 'Établissements d\'enseignement',
-    incentive: 'Attraction d\'étudiants internationaux, amélioration de l\'offre de services, contrôle de l\'aménagement.',
-    roi: 'Modéré (5–7%)',
+    icon: '🎓',
+    type: 'Écoles & groupes d’enseignement',
+    incentive: 'Solution mutualisable entre établissements, attractivité renforcée, maîtrise des coûts et des places réservées.',
+    roi: 'ROI ~5,7 ans',
     risk: 'Faible',
   },
   {
-    icon: '💼',
-    type: 'Fonds immobiliers / promoteurs',
-    incentive: 'Rendement stable & prévisible, classe d\'actifs nouvelle, ESG positif, scalabilité de modèle.',
-    roi: 'Bon (8–12%)',
+    icon: '🏗️',
+    type: 'Partenaires industriels / construction modulaire',
+    incentive: 'Industrialisation d’un produit duplicable, standardisation, baisse des coûts à volume croissant.',
+    roi: 'Croissance forte',
     risk: 'Modéré',
   },
   {
-    icon: '🌱',
-    type: 'Fonds ESG / Impact',
-    incentive: 'Durabilité certifiée, impact social & environnemental mesurable, contributeur à ODD.',
-    roi: 'Très bon (10–15%)',
+    icon: '💼',
+    type: 'Investisseurs equity / impact',
+    incentive: 'Marché sous tension, modèle scalable, valorisation visée à 5–6 ans avec sortie potentielle x5 à x7.',
+    roi: 'Multiple x5–x7',
     risk: 'Modéré',
   },
 ];
 
 const financialMetrics = [
-  { label: 'Coût construction', vs: '-50%', ref: 'vs. immeuble classique', positive: true },
-  { label: 'Délai réalisation', vs: '-85%', ref: '6–8 sem. vs. 3–5 ans', positive: true },
-  { label: 'Loyer moyen', vs: '-35%', ref: 'vs. marché urbain', positive: true },
-  { label: 'TRI estimé', vs: '+8–12%', ref: '10 ans horizon', positive: true },
+  { label: 'Coût par logement', vs: '-76%', ref: '23,8 k€ vs. ~100 k€', positive: true },
+  { label: 'Délai de montage', vs: '-95%', ref: '10 j/module vs. 18–24 mois', positive: true },
+  { label: 'Loyer cible', vs: '< 400€', ref: 'charges incluses', positive: true },
+  { label: 'ROI école', vs: '5,7 ans', ref: 'sur 40 logements', positive: true },
 ];
 
 export default function Financier() {
   return (
     <div className="page-enter">
       <PageHero
-        tag="Étude Financière"
-        title="Un modèle économiquement viable"
-        subtitle="La Ruche offre un ROI attractif tout en maintenant des loyers accessibles aux étudiants. Voici comment."
-      />
+  tag="Étude Financière"
+  title="Un modèle modulaire rentable et industrialisable"
+  subtitle="La Ruche combine un coût de construction réduit, un déploiement rapide et un modèle économique viable pour les écoles comme pour les investisseurs."
+/>
 
       <div className="section-divider" />
 
       <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '5rem 1.5rem' }}>
         <SectionHeader
-          tag="Investissement initial"
-          title="CAPEX : La Ruche vs. résidence classique"
-          subtitle="La rapidité de déploiement réduit les coûts indirects (frais de financement, intérêts, gestion prolongée)."
-        />
+  tag="Investissement initial"
+  title="CAPEX : La Ruche vs. résidence classique"
+  subtitle="Grâce à la préfabrication et au montage rapide sur site, La Ruche réduit fortement le coût par logement et le temps de déploiement."
+/>
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
           {capexComparison.map((comp, i) => (
@@ -198,10 +203,10 @@ export default function Financier() {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'start' }}>
           <div>
             <SectionHeader
-              tag="Exploitation annuelle"
-              title="OPEX : coûts de fonctionnement"
-              subtitle="Budget prévisionnel pour l'exploitation complète d'un campus de 50 logements (année stabilisée)."
-            />
+  tag="Exploitation annuelle"
+  title="OPEX : charges d’exploitation d’un module"
+  subtitle="Budget prévisionnel pour un module de 40 logements, incluant énergie résiduelle, maintenance, gestion et services."
+/>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '2rem' }}>
               {opexBreakdown.map((item, i) => (
                 <div key={i}>
@@ -224,20 +229,20 @@ export default function Financier() {
               }}
             >
               <div style={{ color: '#4ADE80', fontWeight: 700, fontSize: '0.9rem', marginBottom: '0.375rem' }}>
-                Budget annuel : ~650–700 k€
-              </div>
-              <div style={{ color: '#A7C9A0', fontSize: '0.82rem', lineHeight: 1.6 }}>
-                Soit 13–14 k€ par logement/an. Chauffage efficace = économie majeure vs. résidences conventionnelles.
-              </div>
+  Budget annuel estimé : ~35–45 k€ / module
+</div>
+<div style={{ color: '#A7C9A0', fontSize: '0.82rem', lineHeight: 1.6 }}>
+  L’autoconsommation photovoltaïque et la PAC limitent fortement les charges énergétiques, tout en maintenant un loyer étudiant abordable.
+</div>
             </div>
           </div>
 
           <div>
             <SectionHeader
-              tag="Modèle de loyers"
-              title="Trois tiers tarifaires"
-              subtitle="Loyers mensuels moyens, charges incluses. Accessibilité progressive selon le profil étudiant."
-            />
+  tag="Modèle de loyers"
+  title="Des loyers maintenus sous 400 €"
+  subtitle="Objectif du projet : rester accessible au plus grand nombre tout en assurant la viabilité économique du module."
+/>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {rentModels.map((model, i) => (
                 <div key={i} style={{
@@ -271,18 +276,18 @@ export default function Financier() {
 
       <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '5rem 1.5rem' }}>
         <SectionHeader
-          tag="Performance financière"
-          title="Rentabilité du projet"
-          subtitle="Projection de ROI sur 10 ans, base 50 logements à taux d'occupation progressif."
-          centered
-        />
+  tag="Performance financière"
+  title="Trajectoire de croissance de l’entreprise"
+  subtitle="Projection sur 6 ans, basée sur une montée en puissance progressive des ventes de modules."
+  centered
+/>
 
         <div style={{ background: '#0F1A0B', border: '1px solid rgba(245,158,11,0.08)', borderRadius: '12px', overflow: 'hidden' }}>
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: '600px' }}>
               <thead>
                 <tr style={{ borderBottom: '1px solid rgba(245,158,11,0.08)' }}>
-                  {['Année', 'Taux occupancy', 'Flux de trésorerie', 'ROI cumulatif'].map((h) => (
+                  {['Année', 'Taux d’occupation', 'Marge cumulée', 'Valorisation potentielle'].map((h) => (
                     <th
                       key={h}
                       style={{
@@ -330,12 +335,15 @@ export default function Financier() {
           </div>
           <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
             {[
-              'Loyer moyen = 400€/mois + 100€ charges',
-              'Taux d\'occupation année 1 : 85%, année 3+ : 95–98%',
-              'OPEX = 650 k€/an (année stabilisée)',
-              'Financement : 60% emprunt (3% sur 20 ans), 40% fonds propres',
-              'Pas de revalorisation loyer pendant 5 ans (hypothèse prudente)',
-            ].map((item, i) => (
+  '1 module = 20 conteneurs = 40 logements étudiants',
+  'Coût de vente d’un module : 950 k€',
+  'Marge estimée par module : 250 k€',
+  'Loyer moyen étudiant : 350 €/mois',
+  'Recette annuelle école : 168 k€ pour 40 logements',
+  'ROI école : 950 k€ / 168 k€ ≈ 5,7 ans',
+  'Levée visée : 1,5 M€ pour R&D, prototype et industrialisation',
+  'Objectif : 105 modules vendus en 6 ans',
+].map((item, i) => (
               <li key={i} style={{ color: '#A7C9A0', fontSize: '0.8rem', display: 'flex', gap: '0.5rem', alignItems: 'flex-start' }}>
                 <span style={{ color: '#F59E0B', fontWeight: 700, flexShrink: 0 }}>•</span>
                 {item}
@@ -349,10 +357,10 @@ export default function Financier() {
 
       <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '5rem 1.5rem' }}>
         <SectionHeader
-          tag="Profils investisseurs"
-          title="Pour qui La Ruche est-elle intéressante ?"
-          centered
-        />
+  tag="Profils investisseurs"
+  title="Qui a intérêt à financer La Ruche ?"
+  centered
+/>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1rem' }}>
           {investorTypes.map((inv, i) => (
@@ -386,11 +394,11 @@ export default function Financier() {
       <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1.5rem 5rem' }}>
         <StatGrid
           stats={[
-            { value: '-50%', label: 'Coût construction', sub: 'vs. résidence classique', color: 'green' },
-            { value: '8–12%', label: 'TRI estimé', sub: '10 ans horizon', color: 'amber' },
-            { value: '400€', label: 'Loyer moyen', sub: 'toutes charges incluses', color: 'green' },
-            { value: '6 ans', label: 'Retour sur investissement', sub: 'année pleine occupancy', color: 'amber' },
-          ]}
+  { value: '950 k€', label: 'Coût d’un module', sub: '40 logements', color: 'green' },
+  { value: '250 k€', label: 'Marge par module', sub: 'vente à 950 k€', color: 'amber' },
+  { value: '350€', label: 'Loyer moyen', sub: 'objectif étudiant', color: 'green' },
+  { value: '5,7 ans', label: 'ROI école', sub: 'hors services annexes', color: 'amber' },
+]}
         />
       </section>
     </div>
