@@ -232,31 +232,31 @@ const heatingSystems = [
 const planImage = {
   title: 'Schéma d’aménagement du conteneur',
   desc: 'Plan du conteneur 40 pieds avec deux logements et noyau central mutualisé',
-  src: 'LIEN_SCHEMA_CONTAINER',
+  src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1776773583/Image1_dgeunk.png',
 };
 
 const fusionGallery = [
   {
     title: 'Implantation des 5 conteneurs dans le module',
     desc: 'Principe géométrique d’un étage dans l’hexagone',
-    src: 'LIEN_SCHEMA_MODULE_PLAN',
+    src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1776763926/Capture_decran_2026-04-21_112141_r771xp.png',
   },
   {
     title: 'Vue Fusion du module',
     desc: 'Vue d’ensemble du module logement sur plusieurs niveaux',
-    src: 'LIEN_IMAGE_FUSION_1',
+    src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1776763928/Capture_decran_2026-04-21_112008_zmb52u.png',
   },
   {
     title: 'Détail constructif du module',
     desc: 'Structure porteuse, dalle et insertion des conteneurs',
-    src: 'LIEN_IMAGE_FUSION_2',
+    src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1776763926/Capture_decran_2026-04-21_112035_upm68x.png',
   },
 ];
 
 const pvImage = {
   title: 'Toiture photovoltaïque du module',
   desc: 'Vue du plafond hexagonal supportant le champ PV',
-  src: 'LIEN_IMAGE_TOIT_PV',
+  src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1776773801/Capture_decran_2026-04-21_11214_mztwh1.png',
 };
 
 export default function Logements() {
