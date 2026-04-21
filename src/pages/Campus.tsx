@@ -4,43 +4,123 @@ import SectionHeader from '../components/SectionHeader';
 import StatGrid from '../components/StatGrid';
 
 const moduleTypes = [
-  { emoji: '🏠', name: 'Logement', desc: 'Studios 20 m² et T1 30 m² aménagés dans des conteneurs 20 ou 40 pieds. Salle de bain intégrée, kitchenette, rangements optimisés.', count: '40–80', unit: 'unités typ.' },
-  { emoji: '🍽️', name: 'Restauration', desc: 'Cuisines collectives, cafétéria, salle à manger. Un module de restauration peut servir jusqu\'à 200 couverts par service.', count: '1–3', unit: 'modules' },
-  { emoji: '👕', name: 'Laverie', desc: 'Laverie mutualisée avec machines basse consommation, récupération de chaleur et système de réservation connecté.', count: '1–2', unit: 'modules' },
-  { emoji: '📚', name: 'Espace Études', desc: 'Salles de travail individuel et collectif, bibliothèque, bornes informatiques. Conçu pour la concentration et la collaboration.', count: '2–4', unit: 'modules' },
-  { emoji: '⚽', name: 'Sport & Loisirs', desc: 'Salle de fitness, espace détente, terrasse. Les modules sport s\'ouvrent sur des espaces extérieurs partagés.', count: '1–2', unit: 'modules' },
-  { emoji: '🌿', name: 'Espaces Verts', desc: 'Jardins partagés, potagers, zones de biodiversité. Intégrés dans les interstices du pavage hexagonal.', count: 'variable', unit: '' },
-  { emoji: '🚲', name: 'Mobilité', desc: 'Local à vélos sécurisé, bornes de recharge électrique, point de co-voiturage. Mobilité douce au cœur du campus.', count: '1', unit: 'hub central' },
-  { emoji: '⚙️', name: 'Technique', desc: 'Module dédié aux équipements : électricité, eau, gestion thermique centralisée. Invisible mais indispensable.', count: '1–2', unit: 'modules' },
+  {
+    emoji: '🏠',
+    name: 'Logement',
+    desc: 'Module standard de 20 conteneurs 40 pieds sur 4 niveaux, soit 40 logements étudiants. Les espaces privatifs sont compacts et les fonctions lourdes peuvent être mutualisées pour optimiser la surface utile et les coûts.',
+    count: '1',
+    unit: 'module type',
+  },
+  {
+    emoji: '🍽️',
+    name: 'Restauration',
+    desc: 'Module de vie collective intégrant cuisine partagée, cafétéria, salle à manger et espaces de convivialité. Il complète les logements et limite les équipements redondants dans chaque unité.',
+    count: '1–2',
+    unit: 'modules',
+  },
+  {
+    emoji: '👕',
+    name: 'Laverie',
+    desc: 'Module mutualisé avec lave-linge, sèche-linge, tri du linge et rangements techniques. Il évite d’encombrer les logements avec des équipements énergivores rarement utilisés en continu.',
+    count: '1',
+    unit: 'module',
+  },
+  {
+    emoji: '📚',
+    name: 'Espace Études',
+    desc: 'Salles de travail individuel et collectif, zones calmes, espace coworking et connexions numériques. Ce module répond aux besoins réels des étudiants au-delà du simple logement.',
+    count: '1–2',
+    unit: 'modules',
+  },
+  {
+    emoji: '⚽',
+    name: 'Sport & Loisirs',
+    desc: 'Salle polyvalente, espace détente, terrasse et zones de rencontre. Le campus ne se limite pas à loger : il favorise aussi l’équilibre de vie et le lien social.',
+    count: '0–1',
+    unit: 'module',
+  },
+  {
+    emoji: '🌿',
+    name: 'Espaces Verts',
+    desc: 'Jardins collaboratifs, potagers, ruches, zones de biodiversité et patios. Ils occupent les interstices du pavage et renforcent l’identité de “La Ruche” à l’échelle du campus.',
+    count: 'variable',
+    unit: '',
+  },
+  {
+    emoji: '🚲',
+    name: 'Mobilité',
+    desc: 'Hub vélos, stationnement sécurisé, bornes de recharge, covoiturage et connexions piétonnes. Le campus est pensé pour réduire la dépendance à la voiture individuelle.',
+    count: '1',
+    unit: 'hub central',
+  },
+  {
+    emoji: '⚙️',
+    name: 'Technique',
+    desc: 'Module ou noyau technique regroupant PAC, ECS, gestion électrique, stockage, raccordements et supervision énergétique. Standardisé, il accélère le montage et le démontage.',
+    count: '1',
+    unit: 'module',
+  },
 ];
 
 const targets = [
   {
     title: 'Étudiants en licence et master',
-    desc: 'La cible principale : étudiants en résidence longue durée (9–12 mois) en quête d\'un logement abordable et de qualité.',
+    desc: 'Public principal du projet : étudiants présents 9 à 12 mois par an, recherchant un logement abordable, rapide à attribuer et proche de leur établissement.',
     icon: '🎓',
   },
   {
-    title: 'Doctorants et chercheurs',
-    desc: 'Des profils qui restent 1 à 3 ans sur un campus et ont besoin d\'un environnement calme et bien équipé.',
+    title: 'Doctorants et jeunes chercheurs',
+    desc: 'Profils présents plus longtemps, ayant besoin d’un environnement calme, d’espaces de travail et d’une solution immédiatement opérationnelle à proximité du campus.',
     icon: '🔬',
   },
   {
     title: 'Étudiants en mobilité internationale',
-    desc: 'Erasmus, échanges bilatéraux — des séjours de 3 à 12 mois qui nécessitent flexibilité et accueil clé en main.',
+    desc: 'Séjours de 3 à 12 mois nécessitant un logement clé en main, flexible, meublé et intégré dans un environnement lisible dès l’arrivée sur le campus.',
     icon: '✈️',
   },
   {
     title: 'Alternants et stagiaires',
-    desc: 'Contrats courts de 3 à 6 mois, souvent à distance de leur domicile. La Ruche propose des baux très flexibles.',
+    desc: 'Profils en mobilité temporaire, souvent éloignés de leur domicile, pour lesquels la souplesse d’installation et la rapidité de déploiement sont déterminantes.',
     icon: '💼',
   },
 ];
 
 const adaptability = [
-  { title: 'Campus compact', desc: '20 à 40 logements + services essentiels. Pour une petite école ou une antenne universitaire. Emprise foncière : ~2 500 m².' },
-  { title: 'Campus intermédiaire', desc: '40 à 100 logements + module restaurant + sport. Campus complet et autonome. Emprise : ~5 000 à 8 000 m².' },
-  { title: 'Grand campus', desc: '100 à 200 logements, tous les modules disponibles. Pour une grande université ou un technopôle. Emprise : 10 000 à 20 000 m².' },
+  {
+    title: 'Campus compact',
+    desc: '1 à 2 modules logement, complétés par les services essentiels. Solution adaptée à une petite école, une antenne universitaire ou un premier déploiement pilote.',
+  },
+  {
+    title: 'Campus intermédiaire',
+    desc: '3 à 5 modules logement avec restauration, étude, laverie et espaces extérieurs. Permet de loger plusieurs établissements sur un même site mutualisé.',
+  },
+  {
+    title: 'Grand campus',
+    desc: '6 modules et plus, avec une vraie mixité de fonctions. Le système conserve sa lisibilité grâce au pavage modulaire et à la répétition de modules standardisés.',
+  },
+];
+
+const campusGallery = [
+  {
+    title: 'Vue aérienne du campus',
+    desc: 'Implantation générale des modules et des patios',
+    src: 'LIEN_IMAGE_1',
+  },
+  {
+    title: 'Cœur de vie commun',
+    desc: 'Espaces partagés, circulation et convivialité',
+    src: 'LIEN_IMAGE_2',
+  },
+  {
+    title: 'Module logement type',
+    desc: 'Exemple de composition standard sur 4 niveaux',
+    src: 'LIEN_IMAGE_3',
+  },
+  {
+    title: 'Extension du campus',
+    desc: 'Ajout progressif de modules sur la trame hexagonale',
+    src: 'LIEN_IMAGE_4',
+  },
 ];
 
 export default function Campus() {
@@ -48,8 +128,8 @@ export default function Campus() {
     <div className="page-enter">
       <PageHero
         tag="Le Campus"
-        title="Un campus qui respire et s'adapte"
-        subtitle="La disposition hexagonale crée un maillage organique et efficace — comme une ruche naturelle — où chaque module trouve sa place et interagit avec ses voisins."
+        title="Un éco-campus modulaire, extensible et mutualisé"
+        subtitle="La Ruche applique une logique de pavage hexagonal à l’échelle du campus : les modules restent rationnels et constructibles, tandis que leur assemblage crée une organisation organique, évolutive et lisible."
       />
 
       <div className="section-divider" />
@@ -59,26 +139,48 @@ export default function Campus() {
           <div>
             <SectionHeader
               tag="Principe de pavage"
-              title="L'hexagone : le secret de la ruche"
+              title="La ruche n’est pas un bâtiment : c’est une logique d’assemblage"
             />
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {[
-                { title: 'Optimisation de l\'espace', desc: 'L\'hexagone est la forme géométrique qui maximise la surface occupée avec un minimum de périmètre — exactement comme dans une ruche d\'abeilles.' },
-                { title: 'Connexions naturelles', desc: 'Chaque hexagone partage 6 faces avec ses voisins. Les passerelles et couloirs couverts créent des liens directs entre les modules.' },
-                { title: 'Croissance organique', desc: 'On ajoute un module en le collant simplement à une face existante. Pas besoin de repenser l\'ensemble lors d\'une extension.' },
+                {
+                  title: 'Modules rationnels, campus alvéolaire',
+                  desc: 'Les conteneurs restent organisés selon une trame constructive rectangulaire pour préserver la surface utile, la compacité thermique et la facilité de fabrication. La géométrie hexagonale apparaît à l’échelle du campus.',
+                },
+                {
+                  title: 'Croissance simple et réversible',
+                  desc: 'Chaque nouveau module vient se connecter à une face libre du pavage. Le campus peut ainsi s’étendre ou se reconfigurer sans remettre en cause l’ensemble du plan.',
+                },
+                {
+                  title: 'Mutualisation des fonctions',
+                  desc: 'Tous les besoins ne sont pas intégrés dans les logements. La restauration, l’étude, la laverie, les espaces verts et les équipements techniques sont répartis dans des modules dédiés pour améliorer l’usage global.',
+                },
               ].map((item, i) => (
                 <div key={i} style={{ display: 'flex', gap: '1rem', alignItems: 'start' }}>
-                  <div style={{
-                    width: 32, height: 32, borderRadius: '50%',
-                    background: 'rgba(245,158,11,0.15)',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    color: '#F59E0B', fontWeight: 800, fontSize: '0.8rem', flexShrink: 0,
-                  }}>
+                  <div
+                    style={{
+                      width: 32,
+                      height: 32,
+                      borderRadius: '50%',
+                      background: 'rgba(245,158,11,0.15)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: '#F59E0B',
+                      fontWeight: 800,
+                      fontSize: '0.8rem',
+                      flexShrink: 0,
+                    }}
+                  >
                     {i + 1}
                   </div>
                   <div>
-                    <div style={{ color: '#F0FDF4', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.25rem' }}>{item.title}</div>
-                    <div style={{ color: '#A7C9A0', fontSize: '0.85rem', lineHeight: 1.6 }}>{item.desc}</div>
+                    <div style={{ color: '#F0FDF4', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.25rem' }}>
+                      {item.title}
+                    </div>
+                    <div style={{ color: '#A7C9A0', fontSize: '0.85rem', lineHeight: 1.6 }}>
+                      {item.desc}
+                    </div>
                   </div>
                 </div>
               ))}
@@ -94,9 +196,60 @@ export default function Campus() {
 
       <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '5rem 1.5rem' }}>
         <SectionHeader
+          tag="Galerie du campus"
+          title="Quatre vues pour comprendre La Ruche"
+          subtitle="Remplace simplement les liens ci-dessous par tes rendus du campus."
+          centered
+        />
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1rem' }}>
+          {campusGallery.map((img, i) => (
+            <div
+              key={i}
+              style={{
+                background: '#0F1A0B',
+                border: '1px solid rgba(245,158,11,0.1)',
+                borderRadius: '12px',
+                overflow: 'hidden',
+              }}
+            >
+              <div
+                style={{
+                  aspectRatio: '4 / 3',
+                  background: '#111A0F',
+                  borderBottom: '1px solid rgba(245,158,11,0.08)',
+                }}
+              >
+                <img
+                  src={img.src}
+                  alt={img.title}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    display: 'block',
+                  }}
+                />
+              </div>
+              <div style={{ padding: '1rem' }}>
+                <div style={{ color: '#F0FDF4', fontWeight: 700, fontSize: '0.9rem', marginBottom: '0.35rem' }}>
+                  {img.title}
+                </div>
+                <div style={{ color: '#A7C9A0', fontSize: '0.82rem', lineHeight: 1.6 }}>
+                  {img.desc}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <div className="section-divider" style={{ maxWidth: '1280px', margin: '0 auto' }} />
+
+      <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '5rem 1.5rem' }}>
+        <SectionHeader
           tag="Les modules"
-          title="Tout ce qu'il faut, exactement où il le faut"
-          subtitle="Huit types de modules constituent le vocabulaire architectural de La Ruche. Chaque campus est une combinaison unique, pensée selon les besoins locaux."
+          title="Un vocabulaire architectural simple et répétable"
+          subtitle="Chaque campus est une combinaison de modules standardisés. Cette répétition réduit les coûts, accélère le montage et facilite l’extension future."
           centered
         />
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1rem' }}>
@@ -108,11 +261,17 @@ export default function Campus() {
                   <span style={{ color: '#F0FDF4', fontWeight: 700, fontSize: '0.95rem' }}>{mod.name}</span>
                 </div>
                 {mod.count && (
-                  <span style={{
-                    color: '#F59E0B', fontSize: '0.75rem', fontWeight: 700,
-                    background: 'rgba(245,158,11,0.1)', padding: '0.2rem 0.5rem',
-                    borderRadius: '4px', whiteSpace: 'nowrap',
-                  }}>
+                  <span
+                    style={{
+                      color: '#F59E0B',
+                      fontSize: '0.75rem',
+                      fontWeight: 700,
+                      background: 'rgba(245,158,11,0.1)',
+                      padding: '0.2rem 0.5rem',
+                      borderRadius: '4px',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
                     {mod.count} {mod.unit}
                   </span>
                 )}
@@ -137,8 +296,12 @@ export default function Campus() {
                 <div key={i} className="info-card" style={{ display: 'flex', gap: '1rem' }}>
                   <span style={{ fontSize: '1.5rem', flexShrink: 0 }}>{t.icon}</span>
                   <div>
-                    <div style={{ color: '#F0FDF4', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.375rem' }}>{t.title}</div>
-                    <div style={{ color: '#A7C9A0', fontSize: '0.82rem', lineHeight: 1.6 }}>{t.desc}</div>
+                    <div style={{ color: '#F0FDF4', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.375rem' }}>
+                      {t.title}
+                    </div>
+                    <div style={{ color: '#A7C9A0', fontSize: '0.82rem', lineHeight: 1.6 }}>
+                      {t.desc}
+                    </div>
                   </div>
                 </div>
               ))}
@@ -148,7 +311,7 @@ export default function Campus() {
           <div>
             <SectionHeader
               tag="Flexibilité"
-              title="Trois tailles de campus types"
+              title="Trois échelles de campus types"
             />
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {adaptability.map((a, i) => (
@@ -176,10 +339,10 @@ export default function Campus() {
       <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1.5rem 5rem' }}>
         <StatGrid
           stats={[
-            { value: '~18 m²', label: 'Surface utile', sub: 'par module logement std.', color: 'amber' },
-            { value: '6', label: 'Connexions max.', sub: 'par module hexagonal', color: 'green' },
-            { value: '8 types', label: 'De modules disponibles', sub: 'combinables à l\'infini', color: 'amber' },
-            { value: '3 sem.', label: 'Installation d\'un module', sub: 'de la livraison à l\'emménagement', color: 'green' },
+            { value: '20', label: 'Conteneurs', sub: 'par module logement standard', color: 'amber' },
+            { value: '40', label: 'Étudiants logés', sub: 'par module logement', color: 'green' },
+            { value: '8 types', label: 'De modules disponibles', sub: 'pour composer le campus', color: 'amber' },
+            { value: '10 j', label: 'Montage optimisé', sub: 'par module en opérations simultanées', color: 'green' },
           ]}
         />
       </section>
@@ -191,19 +354,26 @@ export default function Campus() {
           padding: '3rem 1.5rem',
         }}
       >
-        <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.5rem' }}>
+        <div
+          style={{
+            maxWidth: '1280px',
+            margin: '0 auto',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            flexWrap: 'wrap',
+            gap: '1.5rem',
+          }}
+        >
           <div>
             <div style={{ color: '#F0FDF4', fontWeight: 700, fontSize: '1.1rem', marginBottom: '0.375rem' }}>
-              Envie d'en savoir plus sur les logements ?
+              Envie d’en savoir plus sur les logements ?
             </div>
             <div style={{ color: '#A7C9A0', fontSize: '0.875rem' }}>
-              Découvrez les détails techniques des conteneurs, l'isolation et le bilan thermique.
+              Découvre les détails techniques des conteneurs, l’isolation, la PAC et le bilan énergétique.
             </div>
           </div>
-          <button
-            className="btn-primary"
-            style={{ whiteSpace: 'nowrap' }}
-          >
+          <button className="btn-primary" style={{ whiteSpace: 'nowrap' }}>
             Les logements <ArrowRight size={16} />
           </button>
         </div>
@@ -221,12 +391,12 @@ function HexCampusVisualization() {
     { q: 0, r: 1, type: 'logement', color: '#F59E0B', label: '🏠' },
     { q: -1, r: 1, type: 'logement', color: '#F59E0B', label: '🏠' },
     { q: -1, r: 0, type: 'logement', color: '#F59E0B', label: '🏠' },
-    { q: 0, r: -1, type: 'logement', color: '#F59E0B', label: '🏠' },
-    { q: 1, r: -1, type: 'restauration', color: '#4ADE80', label: '🍽️' },
-    { q: 2, r: -1, type: 'étude', color: '#38BDF8', label: '📚' },
-    { q: 2, r: 0, type: 'sport', color: '#F472B6', label: '⚽' },
-    { q: 1, r: 1, type: 'laverie', color: '#A78BFA', label: '👕' },
-    { q: -1, r: 2, type: 'logement', color: '#F59E0B', label: '🏠' },
+    { q: 0, r: -1, type: 'restauration', color: '#4ADE80', label: '🍽️' },
+    { q: 1, r: -1, type: 'études', color: '#38BDF8', label: '📚' },
+    { q: 2, r: -1, type: 'mobilité', color: '#F472B6', label: '🚲' },
+    { q: 2, r: 0, type: 'technique', color: '#A78BFA', label: '⚙️' },
+    { q: 1, r: 1, type: 'laverie', color: '#F87171', label: '👕' },
+    { q: -1, r: 2, type: 'sport', color: '#FB923C', label: '⚽' },
     { q: -2, r: 1, type: 'logement', color: '#F59E0B', label: '🏠' },
     { q: -2, r: 2, type: 'jardins', color: '#86EFAC', label: '🌿' },
   ];
@@ -250,8 +420,6 @@ function HexCampusVisualization() {
   };
 
   const viewSize = 280;
-  const offsetX = viewSize / 2;
-  const offsetY = viewSize / 2;
 
   return (
     <div
@@ -264,8 +432,17 @@ function HexCampusVisualization() {
         maxWidth: '360px',
       }}
     >
-      <div style={{ color: '#A7C9A0', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '1rem', textAlign: 'center' }}>
-        Vue schématique d'un campus type
+      <div
+        style={{
+          color: '#A7C9A0',
+          fontSize: '0.75rem',
+          textTransform: 'uppercase',
+          letterSpacing: '0.1em',
+          marginBottom: '1rem',
+          textAlign: 'center',
+        }}
+      >
+        Vue schématique d’un campus type
       </div>
       <svg
         width="100%"
@@ -300,8 +477,8 @@ function HexCampusVisualization() {
           { color: '#F59E0B', label: 'Logement' },
           { color: '#4ADE80', label: 'Restauration' },
           { color: '#38BDF8', label: 'Études' },
-          { color: '#F472B6', label: 'Sport' },
-          { color: '#A78BFA', label: 'Laverie' },
+          { color: '#A78BFA', label: 'Technique' },
+          { color: '#F87171', label: 'Laverie' },
           { color: '#86EFAC', label: 'Jardins' },
         ].map((item, i) => (
           <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.7rem', color: '#A7C9A0' }}>
