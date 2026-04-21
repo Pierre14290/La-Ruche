@@ -1,5 +1,16 @@
 import { useState } from 'react';
-import { Thermometer, Wind, Layers, Box, Maximize2, X } from 'lucide-react';
+import {
+  Thermometer,
+  Wind,
+  Layers,
+  Box,
+  Maximize2,
+  X,
+  Sun,
+  Battery,
+  Zap,
+  Gauge,
+} from 'lucide-react';
 import PageHero from '../components/PageHero';
 import SectionHeader from '../components/SectionHeader';
 import StatGrid from '../components/StatGrid';
@@ -9,7 +20,8 @@ const containerChoice = [
     name: 'Conteneur 40 pieds',
     dims: '12,00 m × 2,44 m × 2,59 m',
     surface: '~29,3 m² brut / ~25–26 m² utile après isolation',
-    usage: 'Choix retenu pour La Ruche. Un conteneur accueille 2 étudiants avec 2 espaces privatifs latéraux et un noyau sanitaire central mutualisé.',
+    usage:
+      'Choix retenu pour La Ruche. Un conteneur accueille 2 étudiants avec 2 espaces privatifs latéraux et un noyau sanitaire central mutualisé.',
     weight: '~3 800 kg (vide)',
     tag: 'Choix retenu',
     tagColor: '#4ADE80',
@@ -18,7 +30,8 @@ const containerChoice = [
     name: 'Conteneur 20 pieds',
     dims: '6,06 m × 2,44 m × 2,59 m',
     surface: '~14,9 m² brut',
-    usage: 'Trop compact pour accueillir confortablement 2 étudiants. Il reste pertinent pour certains modules de service ou techniques.',
+    usage:
+      'Trop compact pour accueillir confortablement 2 étudiants. Il reste pertinent pour certains modules de service ou techniques.',
     weight: '~2 300 kg (vide)',
     tag: 'Secondaire',
     tagColor: '#F59E0B',
@@ -27,7 +40,8 @@ const containerChoice = [
     name: 'High Cube 40 pieds',
     dims: '12,00 m × 2,44 m × 2,89 m',
     surface: '~29,3 m² brut / hauteur majorée',
-    usage: 'Variante intéressante pour un meilleur confort spatial, mais non retenue comme base standard afin de simplifier l’industrialisation.',
+    usage:
+      'Variante intéressante pour un meilleur confort spatial, mais non retenue comme base standard afin de simplifier l’industrialisation.',
     weight: '~3 900 kg (vide)',
     tag: 'Option',
     tagColor: '#38BDF8',
@@ -61,28 +75,32 @@ const insulationSystems = [
   {
     icon: <Layers size={20} />,
     title: 'Murs isolés en laine de verre + parement',
-    desc: 'L’enveloppe métallique du conteneur nécessite une isolation performante. Le système retenu repose sur 10 cm de laine de verre et 1,3 cm de placo pour atteindre l’objectif réglementaire.',
+    desc:
+      'L’enveloppe métallique du conteneur nécessite une isolation performante. Le système retenu repose sur 10 cm de laine de verre et 1,3 cm de placo pour atteindre l’objectif réglementaire.',
     performance: '10 cm',
     unit: 'laine de verre',
   },
   {
     icon: <Box size={20} />,
     title: 'Toiture renforcée',
-    desc: 'La toiture est la zone la plus sensible en hiver comme en été. Une épaisseur de 17 cm de laine de verre est retenue afin de limiter fortement les déperditions et les surchauffes.',
+    desc:
+      'La toiture est la zone la plus sensible en hiver comme en été. Une épaisseur de 17 cm de laine de verre est retenue afin de limiter fortement les déperditions et les surchauffes.',
     performance: '17 cm',
     unit: 'laine de verre',
   },
   {
     icon: <Thermometer size={20} />,
     title: 'Plancher isolé',
-    desc: 'Le plancher reçoit 9 cm de laine de verre. Cette valeur permet d’atteindre la résistance thermique visée tout en restant compatible avec la préfabrication du module.',
+    desc:
+      'Le plancher reçoit 9 cm de laine de verre. Cette valeur permet d’atteindre la résistance thermique visée tout en restant compatible avec la préfabrication du module.',
     performance: '9 cm',
     unit: 'laine de verre',
   },
   {
     icon: <Wind size={20} />,
     title: 'Ventilation double flux',
-    desc: 'La ventilation est assurée par une VMC double flux, avec un rendement d’environ 81 %. Elle limite les pertes dues au renouvellement d’air, tout en garantissant une bonne qualité d’air intérieur.',
+    desc:
+      'La ventilation est assurée par une VMC double flux, avec un rendement d’environ 81 %. Elle limite les pertes dues au renouvellement d’air, tout en garantissant une bonne qualité d’air intérieur.',
     performance: '81 %',
     unit: 'rendement',
   },
@@ -95,39 +113,129 @@ const thermalBreakdown = [
 ];
 
 const energyPosts = [
-  { item: 'Usages électriques hors chauffage', value: '~3,95 kWh/j', desc: 'frigos, micro-ondes, plaques, LED, TV, ordinateurs, téléphones, VMC, petits usages' },
-  { item: 'ECS via PAC', value: '~1,1 kWh/j', desc: 'pour 2 étudiants, environ 40 L/j chacun à 40°C' },
-  { item: 'Chauffage via PAC', value: '~5,0 kWh/j', desc: 'en journée hivernale défavorable, avec COP 2,8' },
-  { item: 'Total conteneur en hiver', value: '~10 kWh/j', desc: 'ordre de grandeur retenu pour le dimensionnement' },
+  {
+    item: 'Usages électriques hors chauffage',
+    value: '~3,95 kWh/j',
+    desc:
+      'frigos, micro-ondes, plaques, LED, TV, ordinateurs, téléphones, VMC, petits usages',
+  },
+  {
+    item: 'ECS via PAC',
+    value: '~1,1 kWh/j',
+    desc: 'pour 2 étudiants, environ 40 L/j chacun à 40°C',
+  },
+  {
+    item: 'Chauffage via PAC',
+    value: '~5,0 kWh/j',
+    desc: 'en journée hivernale défavorable, avec COP 2,8',
+  },
+  {
+    item: 'Total conteneur en hiver',
+    value: '~10 kWh/j',
+    desc: 'ordre de grandeur retenu pour le dimensionnement',
+  },
+];
+
+const moduleEnergy = [
+  {
+    title: 'Par conteneur',
+    value: '~10 kWh/j',
+    desc: 'en hiver, pour 2 étudiants',
+  },
+  {
+    title: 'Par module',
+    value: '~200–206 kWh/j',
+    desc: 'pour 20 conteneurs et 40 étudiants',
+  },
+  {
+    title: 'Déperdition thermique',
+    value: '12,2 kW',
+    desc: 'module logement complet',
+  },
+  {
+    title: 'PAC retenue',
+    value: '16–18 kW',
+    desc: 'une seule par module',
+  },
+];
+
+const pvCards = [
+  {
+    icon: <Sun size={20} />,
+    title: 'Champ photovoltaïque',
+    value: '49,5 kWc',
+    desc:
+      '110 panneaux de 450 Wc sur environ 231 m² utiles de toiture, inclinés à 40°.',
+  },
+  {
+    icon: <Battery size={20} />,
+    title: 'Stockage batterie',
+    value: '229 kWh',
+    desc:
+      'Parc LiFePO4 recommandé pour lisser la production, couvrir la nuit et réduire les appels réseau.',
+  },
+  {
+    icon: <Gauge size={20} />,
+    title: 'Production moyenne',
+    value: '~68 kWh/j',
+    desc:
+      'Production journalière moyenne estimée à Rouen avec les rendements retenus.',
+  },
+  {
+    icon: <Zap size={20} />,
+    title: 'Couverture énergétique',
+    value: '~34 %',
+    desc:
+      'Couverture moyenne d’un besoin hivernal complet du module. Le système reste hybride avec appoint réseau.',
+  },
+];
+
+const pvSpecs = [
+  { label: 'Panneaux', value: '110 × 450 Wc' },
+  { label: 'Puissance crête totale', value: '49,5 kWc' },
+  { label: 'Surface PV utile', value: '~231 m²' },
+  { label: 'Inclinaison', value: '40°' },
+  { label: 'Configuration', value: '10 en série × 11 en parallèle' },
+  { label: 'Régulateur / MPPT', value: '600 V DC min / ~155 A' },
+  { label: 'Tension système batterie', value: '409,6 V' },
+  { label: 'Parc batterie', value: '16 batteries LiFePO4' },
+  { label: 'Capacité batterie', value: '229 kWh nominaux' },
+  { label: 'Production moyenne estimée', value: '~68 kWh/j' },
+  { label: 'Besoin hiver module', value: '~200–206 kWh/j' },
+  { label: 'Appoint réseau hiver', value: '~132 kWh/j' },
 ];
 
 const heatingSystems = [
   {
     system: 'PAC air/eau par module',
-    cop: '2,8',
-    desc: 'Une seule pompe à chaleur par module de logement alimente le chauffage et l’eau chaude sanitaire. C’est la solution retenue car elle reste compatible avec le caractère modulaire, démontable et industrialisable du projet.',
+    cop: 'COP 2,8',
+    desc:
+      'Une seule pompe à chaleur par module de logement alimente le chauffage et l’eau chaude sanitaire. C’est la solution retenue car elle reste compatible avec le caractère modulaire, démontable et industrialisable du projet.',
     recommended: true,
   },
   {
     system: 'Ballon ECS mutualisé',
     cop: '1 000–1 500 L',
-    desc: 'Un ballon d’eau chaude centralisé permet de répondre aux besoins des 40 étudiants du module. La valeur de 1 200 L constitue une bonne base de dimensionnement.',
+    desc:
+      'Un ballon d’eau chaude centralisé permet de répondre aux besoins des 40 étudiants du module. La valeur de 1 200 L constitue une bonne base de dimensionnement.',
     recommended: true,
   },
   {
     system: 'VMC double flux par étage',
     cop: '81 %',
-    desc: 'Un système de ventilation est prévu par étage. Cette stratégie réduit la longueur des réseaux et reste cohérente avec le caractère répétitif de la structure.',
+    desc:
+      'Un système de ventilation est prévu par étage. Cette stratégie réduit la longueur des réseaux et reste cohérente avec le caractère répétitif de la structure.',
     recommended: true,
   },
 ];
 
-const housingGallery = [
-  {
-    title: 'Schéma d’aménagement du conteneur',
-    desc: 'Plan du conteneur 40 pieds avec deux logements et noyau central mutualisé',
-    src: 'LIEN_SCHEMA_CONTAINER',
-  },
+const planImage = {
+  title: 'Schéma d’aménagement du conteneur',
+  desc: 'Plan du conteneur 40 pieds avec deux logements et noyau central mutualisé',
+  src: 'LIEN_SCHEMA_CONTAINER',
+};
+
+const fusionGallery = [
   {
     title: 'Implantation des 5 conteneurs dans le module',
     desc: 'Principe géométrique d’un étage dans l’hexagone',
@@ -144,6 +252,12 @@ const housingGallery = [
     src: 'LIEN_IMAGE_FUSION_2',
   },
 ];
+
+const pvImage = {
+  title: 'Toiture photovoltaïque du module',
+  desc: 'Vue du plafond hexagonal supportant le champ PV',
+  src: 'LIEN_IMAGE_TOIT_PV',
+};
 
 export default function Logements() {
   const [selectedImage, setSelectedImage] = useState<null | {
@@ -281,14 +395,78 @@ export default function Logements() {
             La cuisine complète, la laverie, les espaces d’étude et les services sont mutualisés à l’échelle du campus. Cette décision permet de conserver des logements compacts, tout en améliorant la qualité globale de vie et en réduisant les coûts.
           </div>
         </div>
+
+        <div style={{ marginTop: '1.75rem' }}>
+          <button
+            onClick={() => setSelectedImage(planImage)}
+            style={{
+              width: '100%',
+              background: '#0F1A0B',
+              border: '1px solid rgba(245,158,11,0.1)',
+              borderRadius: '14px',
+              overflow: 'hidden',
+              padding: 0,
+              textAlign: 'left',
+              cursor: 'pointer',
+            }}
+          >
+            <div
+              style={{
+                position: 'relative',
+                aspectRatio: '16 / 7',
+                background: '#111A0F',
+                borderBottom: '1px solid rgba(245,158,11,0.08)',
+              }}
+            >
+              <img
+                src={planImage.src}
+                alt={planImage.title}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'contain',
+                  display: 'block',
+                  background: '#fff',
+                }}
+              />
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '0.85rem',
+                  right: '0.85rem',
+                  width: 38,
+                  height: 38,
+                  borderRadius: '999px',
+                  background: 'rgba(10,18,8,0.72)',
+                  border: '1px solid rgba(255,255,255,0.08)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#F0FDF4',
+                  backdropFilter: 'blur(6px)',
+                }}
+              >
+                <Maximize2 size={16} />
+              </div>
+            </div>
+            <div style={{ padding: '1rem 1.1rem 1.15rem' }}>
+              <div style={{ color: '#F0FDF4', fontWeight: 700, fontSize: '0.96rem', marginBottom: '0.3rem' }}>
+                {planImage.title}
+              </div>
+              <div style={{ color: '#A7C9A0', fontSize: '0.84rem', lineHeight: 1.6 }}>
+                {planImage.desc}
+              </div>
+            </div>
+          </button>
+        </div>
       </section>
 
       <div className="section-divider" style={{ maxWidth: '1280px', margin: '0 auto' }} />
 
       <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '5rem 1.5rem' }}>
         <SectionHeader
-          tag="Galerie technique"
-          title="Plans et vues du module"
+          tag="Vues du module"
+          title="Plans et vues Fusion"
           subtitle="Clique sur une image pour l’agrandir."
           centered
         />
@@ -300,7 +478,7 @@ export default function Logements() {
             gap: '1.5rem',
           }}
         >
-          {housingGallery.map((img, i) => (
+          {fusionGallery.map((img, i) => (
             <button
               key={i}
               onClick={() => setSelectedImage(img)}
@@ -545,8 +723,8 @@ export default function Logements() {
       <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '5rem 1.5rem' }}>
         <SectionHeader
           tag="Bilan énergétique"
-          title="Ordres de grandeur énergétiques"
-          subtitle="Les valeurs ci-dessous servent au dimensionnement du module logement et de son système énergétique."
+          title="Ordres de grandeur pour le module logement"
+          subtitle="Les valeurs ci-dessous servent au dimensionnement du chauffage, du stockage et du système photovoltaïque."
           centered
         />
 
@@ -570,21 +748,177 @@ export default function Logements() {
           ))}
         </div>
 
-        <div
-          style={{
-            marginTop: '1.5rem',
-            background: 'rgba(74,222,128,0.06)',
-            border: '1px solid rgba(74,222,128,0.15)',
-            borderRadius: '10px',
-            padding: '1.25rem',
-          }}
-        >
-          <div style={{ color: '#4ADE80', fontWeight: 700, fontSize: '0.92rem', marginBottom: '0.4rem' }}>
-            Synthèse module logement
+        <div style={{ marginTop: '1.5rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem' }}>
+          {moduleEnergy.map((item, i) => (
+            <div
+              key={i}
+              style={{
+                background: 'rgba(74,222,128,0.06)',
+                border: '1px solid rgba(74,222,128,0.15)',
+                borderRadius: '10px',
+                padding: '1.1rem',
+              }}
+            >
+              <div style={{ color: '#4ADE80', fontWeight: 700, fontSize: '0.84rem', marginBottom: '0.35rem' }}>{item.title}</div>
+              <div style={{ color: '#F0FDF4', fontWeight: 800, fontSize: '1.15rem', marginBottom: '0.35rem' }}>{item.value}</div>
+              <div style={{ color: '#A7C9A0', fontSize: '0.81rem', lineHeight: 1.55 }}>{item.desc}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <div className="section-divider" style={{ maxWidth: '1280px', margin: '0 auto' }} />
+
+      <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '5rem 1.5rem' }}>
+        <SectionHeader
+          tag="Champ photovoltaïque"
+          title="Une toiture productive, mais un système volontairement hybride"
+          subtitle="Le module n’est pas 100 % autonome en hiver. L’objectif réaliste est de maximiser l’autoconsommation et de réduire le besoin réseau sans tomber dans un surdimensionnement trop coûteux."
+        />
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem', marginBottom: '1.5rem' }}>
+          {pvCards.map((card, i) => (
+            <div
+              key={i}
+              style={{
+                background: '#0F1A0B',
+                border: '1px solid rgba(245,158,11,0.1)',
+                borderRadius: '10px',
+                padding: '1.2rem',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.7rem', marginBottom: '0.75rem' }}>
+                <div
+                  style={{
+                    width: 40,
+                    height: 40,
+                    borderRadius: '8px',
+                    background: 'rgba(245,158,11,0.1)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#F59E0B',
+                    flexShrink: 0,
+                  }}
+                >
+                  {card.icon}
+                </div>
+                <div style={{ color: '#F0FDF4', fontWeight: 700, fontSize: '0.9rem' }}>{card.title}</div>
+              </div>
+              <div style={{ color: '#F59E0B', fontWeight: 800, fontSize: '1.25rem', marginBottom: '0.45rem' }}>{card.value}</div>
+              <div style={{ color: '#A7C9A0', fontSize: '0.82rem', lineHeight: 1.6 }}>{card.desc}</div>
+            </div>
+          ))}
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: '1.5rem', alignItems: 'start' }}>
+          <div
+            style={{
+              background: '#0F1A0B',
+              border: '1px solid rgba(245,158,11,0.1)',
+              borderRadius: '10px',
+              padding: '1.25rem',
+            }}
+          >
+            <div style={{ color: '#F0FDF4', fontWeight: 700, fontSize: '0.95rem', marginBottom: '1rem' }}>
+              Dimensionnement retenu
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem 1rem' }}>
+              {pvSpecs.map((item, i) => (
+                <div key={i} style={{ borderBottom: '1px solid rgba(245,158,11,0.06)', paddingBottom: '0.5rem' }}>
+                  <div style={{ color: '#4A6340', fontSize: '0.72rem', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.15rem' }}>
+                    {item.label}
+                  </div>
+                  <div style={{ color: '#A7C9A0', fontSize: '0.84rem', lineHeight: 1.5 }}>{item.value}</div>
+                </div>
+              ))}
+            </div>
           </div>
-          <div style={{ color: '#A7C9A0', fontSize: '0.84rem', lineHeight: 1.65 }}>
-            Pour un module de 20 conteneurs, soit 40 étudiants, le besoin électrique journalier en hiver est de l’ordre de 200 à 206 kWh/j. Cette valeur intègre les usages courants, l’ECS et la consommation électrique de la PAC avec un COP de 2,8.
+
+          <div
+            style={{
+              background: 'rgba(74,222,128,0.06)',
+              border: '1px solid rgba(74,222,128,0.15)',
+              borderRadius: '10px',
+              padding: '1.25rem',
+            }}
+          >
+            <div style={{ color: '#4ADE80', fontWeight: 700, fontSize: '0.92rem', marginBottom: '0.45rem' }}>
+              Résultat énergétique
+            </div>
+            <div style={{ color: '#A7C9A0', fontSize: '0.84rem', lineHeight: 1.7 }}>
+              La toiture photovoltaïque couvre une part significative des besoins du module, mais pas l’intégralité des consommations hivernales. Le projet retient donc une stratégie hybride : production solaire maximisée, stockage batterie intermédiaire, puis appoint réseau d’environ 132 kWh/j en hiver.
+            </div>
+            <div style={{ marginTop: '1rem', color: '#F0FDF4', fontWeight: 700, fontSize: '0.88rem' }}>
+              Pourquoi pas une toiture rotative ?
+            </div>
+            <div style={{ color: '#A7C9A0', fontSize: '0.82rem', lineHeight: 1.6, marginTop: '0.35rem' }}>
+              Le gain énergétique supplémentaire ne compense pas la complexité mécanique, la maintenance et le surcoût. Une toiture fixe inclinée à 40° reste plus crédible pour un système modulaire démontable.
+            </div>
           </div>
+        </div>
+
+        <div style={{ marginTop: '1.75rem' }}>
+          <button
+            onClick={() => setSelectedImage(pvImage)}
+            style={{
+              width: '100%',
+              background: '#0F1A0B',
+              border: '1px solid rgba(245,158,11,0.1)',
+              borderRadius: '14px',
+              overflow: 'hidden',
+              padding: 0,
+              textAlign: 'left',
+              cursor: 'pointer',
+            }}
+          >
+            <div
+              style={{
+                position: 'relative',
+                aspectRatio: '16 / 8',
+                background: '#111A0F',
+                borderBottom: '1px solid rgba(245,158,11,0.08)',
+              }}
+            >
+              <img
+                src={pvImage.src}
+                alt={pvImage.title}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  display: 'block',
+                }}
+              />
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '0.85rem',
+                  right: '0.85rem',
+                  width: 38,
+                  height: 38,
+                  borderRadius: '999px',
+                  background: 'rgba(10,18,8,0.72)',
+                  border: '1px solid rgba(255,255,255,0.08)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#F0FDF4',
+                  backdropFilter: 'blur(6px)',
+                }}
+              >
+                <Maximize2 size={16} />
+              </div>
+            </div>
+            <div style={{ padding: '1rem 1.1rem 1.15rem' }}>
+              <div style={{ color: '#F0FDF4', fontWeight: 700, fontSize: '0.96rem', marginBottom: '0.3rem' }}>
+                {pvImage.title}
+              </div>
+              <div style={{ color: '#A7C9A0', fontSize: '0.84rem', lineHeight: 1.6 }}>
+                {pvImage.desc}
+              </div>
+            </div>
+          </button>
         </div>
       </section>
 
@@ -592,9 +926,9 @@ export default function Logements() {
         <StatGrid
           stats={[
             { value: '12,2 kW', label: 'Déperdition module', sub: '20 conteneurs / 40 étudiants', color: 'amber' },
-            { value: '16–18 kW', label: 'PAC recommandée', sub: 'une par module', color: 'green' },
-            { value: '~200 kWh/j', label: 'Besoin hiver module', sub: 'ordre de grandeur retenu', color: 'amber' },
-            { value: 'RE2020', label: 'Référence visée', sub: 'pour l’enveloppe', color: 'green' },
+            { value: '49,5 kWc', label: 'Champ PV', sub: 'sur toiture hexagonale', color: 'green' },
+            { value: '229 kWh', label: 'Stockage batterie', sub: 'LiFePO4 recommandé', color: 'amber' },
+            { value: '~132 kWh/j', label: 'Appoint réseau hiver', sub: 'ordre de grandeur', color: 'green' },
           ]}
         />
       </section>
