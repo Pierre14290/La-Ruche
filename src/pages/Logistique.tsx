@@ -330,7 +330,7 @@ export default function Logistique() {
 
           <div style={{ aspectRatio: '16 / 9', background: '#111A0F' }}>
             <iframe
-              src={videoEmbedUrl}
+              src='https://res.cloudinary.com/dgsvjcdfk/video/upload/v1776863130/20260422-1228-01.1037597_skfd4n.mp4'
               title="Vidéo de montage du module"
               style={{ width: '100%', height: '100%', border: 'none', display: 'block' }}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
