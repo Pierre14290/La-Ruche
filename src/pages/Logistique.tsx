@@ -1,4 +1,4 @@
-import { Truck, Clock, Hammer, CheckCircle, AlertCircle, BarChart3 } from 'lucide-react';
+import { Truck, Clock, Hammer, CheckCircle, AlertCircle, BarChart3, PlayCircle } from 'lucide-react';
 import PageHero from '../components/PageHero';
 import SectionHeader from '../components/SectionHeader';
 import StatGrid from '../components/StatGrid';
@@ -6,184 +6,203 @@ import StatGrid from '../components/StatGrid';
 const phases = [
   {
     phase: 'Phase 1',
-    title: 'Préparation du site',
-    duration: '1–2 semaines',
+    title: 'Préparation légère du site',
+    duration: '2 jours',
     tasks: [
-      'Levé topographique et piquetage des hexagones',
-      'Terrassement minimal (nivellement)',
-      'Préparation des fondations (plots béton ou dallage)',
-      'Établissement des accès et zones de circulation',
+      'Implantation du module et contrôle altimétrique',
+      'Nivellement léger si nécessaire, sans grand chantier de terrassement',
+      'Mise en place des plots en béton préfabriqués',
+      'Vérification des accès poids lourds et de la zone de levage',
     ],
-    workers: '10–15',
+    workers: '6–8',
   },
   {
     phase: 'Phase 2',
-    title: 'Livraison & positionnement des conteneurs',
-    duration: '2–3 semaines',
+    title: 'Pose de la dalle de base',
+    duration: '1–2 jours',
     tasks: [
-      'Acheminement des conteneurs par camion semi-remorque',
-      'Positionnement par grue (hexagone par hexagone)',
-      'Calage & ancrage des conteneurs',
-      'Connexion structurelles entre modules (passerelles)',
+      'Déchargement des éléments préfabriqués de la dalle hexagonale',
+      'Assemblage sur plots de la dalle bois de 257 m² et 30 cm d’épaisseur',
+      'Contrôle des réservations pour les conteneurs et la structure porteuse',
+      'Préparation des interfaces de montage pour les niveaux supérieurs',
     ],
-    workers: '15–20',
+    workers: '6–8',
   },
   {
     phase: 'Phase 3',
-    title: 'Travaux d\'aménagement intérieur',
-    duration: '2–3 semaines',
+    title: 'Montage d’un étage type',
+    duration: '~1 jour / étage',
     tasks: [
-      'Installation des cloisons intérieures et portes',
-      'Plomberie, électricité, gaz (distribution)',
-      'Pose des revêtements (sol, murs)',
-      'Installation des mobiliers intégrés',
+      'Mise en place de la structure porteuse treillis sur la dalle',
+      'Positionnement des 5 conteneurs dans les emplacements prévus',
+      'Calage, fixation et contrôles géométriques',
+      'Préparation des appuis pour la dalle de l’étage suivant',
     ],
-    workers: '20–30',
+    workers: '6–8',
   },
   {
     phase: 'Phase 4',
-    title: 'Systèmes techniques & finitions',
-    duration: '1–2 semaines',
+    title: 'Empilement des niveaux',
+    duration: '4 à 5 jours',
     tasks: [
-      'PAC air/air et conduits de climatisation',
-      'VMC double flux et conduits',
-      'Chauffage/ECS (si équipement centralisé)',
-      'Électricité : tableaux, éclairage, prises',
+      'Pose des dalles intermédiaires standardisées',
+      'Répétition du principe structure + 5 conteneurs sur 4 niveaux',
+      'Assemblage sec et répétitif pour limiter le temps de chantier',
+      'Coordination des opérations de levage et de sécurisation',
     ],
-    workers: '15–20',
+    workers: '6–8',
   },
   {
     phase: 'Phase 5',
-    title: 'Équipements de confort & tests',
-    duration: '1–2 semaines',
+    title: 'Toiture et champ photovoltaïque',
+    duration: '2 jours',
     tasks: [
-      'Mobiliers, cuisines aménagées, sanitaires complets',
-      'Tests de tous les systèmes (électrique, hydraulique, thermique)',
-      'Nettoyage & détails finaux',
-      'Réceptions techniques et conformités',
+      'Pose de la toiture supérieure spécifique',
+      'Mise en place du support photovoltaïque',
+      'Installation du champ PV, des liaisons et des éléments de protection',
+      'Préparation des raccordements vers le local technique',
     ],
-    workers: '10–15',
+    workers: '5–7',
   },
   {
     phase: 'Phase 6',
-    title: 'Mise en service & livraison',
-    duration: '3–5 jours',
+    title: 'Raccordements, finitions et mise en service',
+    duration: '5 jours',
     tasks: [
-      'Derniers réglages (thermostat, électricité fine)',
-      'Formation & transmission au gestionnaire',
-      'Mise à disposition des clés',
-      'Premiers emménagements étudiants',
+      'Raccordements VMC, électricité, eau, ECS et PAC',
+      'Contrôles, essais de fonctionnement et vérifications de sécurité',
+      'Finitions techniques et mise en service progressive',
+      'Cette phase peut être menée en parallèle du montage d’un autre module',
     ],
-    workers: '5–10',
+    workers: '4–6',
   },
 ];
 
 const logistics = [
   {
     icon: <Truck size={20} />,
-    title: 'Transport & manutention',
-    desc: 'Acheminement des conteneurs par route standard. Pas de permit spéciaux pour les routes normales. Chaque conteneur = 1 camion semi-remorque.',
-    metric: '~50 camions',
-    unit: 'pour 50 modules',
+    title: 'Accès et transport',
+    desc: 'Le système est conçu pour être livré sous forme préfabriquée. Le chantier suppose un accès poids lourds standard et une zone de manœuvre suffisante pour la grue mobile.',
+    metric: '20 conteneurs',
+    unit: 'par module',
   },
   {
     icon: <BarChart3 size={20} />,
-    title: 'Ressources humaines',
-    desc: 'Équipe pluridisciplinaire : maçons (fondations), électriciens, plombiers, menuisiers, spécialistes PAC/VMC.',
-    metric: '15–30',
-    unit: 'personnes simultanées',
+    title: 'Équipe de montage',
+    desc: 'Hypothèse de chantier : 1 chef(fe) de chantier, 1 grutier, 3 à 5 monteurs/assembleurs et 1 à 2 technicien(ne)s fluides/électricité.',
+    metric: '6–8',
+    unit: 'personnes',
   },
   {
     icon: <Hammer size={20} />,
-    title: 'Équipements nécessaires',
-    desc: 'Grues (location), compresseurs, découpe thermique, outillage standard. La plupart peut être loué localement.',
+    title: 'Moyens nécessaires',
+    desc: 'Une grue mobile, l’outillage d’assemblage standard, les moyens de levage et les interfaces de raccordement rapide suffisent. Le chantier reste majoritairement sec.',
     metric: '1 grue',
-    unit: '50 t min., 4–6 sem.',
+    unit: 'mobile',
   },
   {
     icon: <AlertCircle size={20} />,
-    title: 'Points d\'attention',
-    desc: 'Météo (pluies prolongées ralentissent fondations). Accès au site. Disponibilité des entreprises sub-traitantes locales.',
-    metric: 'Climat tempéré',
-    unit: 'idéal',
+    title: 'Points sensibles',
+    desc: 'Tolérances de pose, météo, accès au site, coordination des raccordements et disponibilité des éléments préfabriqués sont les principaux facteurs pouvant ralentir le montage.',
+    metric: 'Faible terrassement',
+    unit: 'chantier sec',
   },
 ];
 
 const timeline = [
-  { week: 'Sem. 1–2', phase: 'Préparation site', pct: 12 },
-  { week: 'Sem. 3–5', phase: 'Positionnement modules', pct: 30 },
-  { week: 'Sem. 6–8', phase: 'Aménagements', pct: 45 },
-  { week: 'Sem. 9–10', phase: 'Finitions & tests', pct: 70 },
-  { week: 'Sem. 11–12', phase: 'Livraison & réception', pct: 100 },
+  { week: 'Jours 1–2', phase: 'Préparation du site', pct: 12 },
+  { week: 'Jours 3–4', phase: 'Plots + dalle de base', pct: 24 },
+  { week: 'Jours 5–10', phase: 'Assemblage structure + conteneurs', pct: 60 },
+  { week: 'Jours 11–12', phase: 'Toiture + champ PV', pct: 72 },
+  { week: 'Jours 13–18', phase: 'Raccordements, finitions, contrôles', pct: 100 },
 ];
 
 const demontage = [
   {
-    step: '1. Évacuation des habitants',
-    desc: 'Préavis et relogement temporaire des résidents. Vente ou réaffectation des meubles intégrés.',
+    step: '1. Déconnexion des réseaux',
+    desc: 'Isolation et déconnexion des réseaux électriques, hydrauliques, VMC, PAC, ECS et PV afin de sécuriser le démontage.',
   },
   {
-    step: '2. Déconnexions techniques',
-    desc: 'Électricité, eau, gaz, chauffage. Récupération des données si systèmes connectés. Isolation temporaire.',
+    step: '2. Dépose des équipements de toiture',
+    desc: 'Retrait du champ photovoltaïque, des supports et des liaisons techniques de la toiture supérieure.',
   },
   {
-    step: '3. Désolidarisation structurelle',
-    desc: 'Retrait des passerelles et liaisons. Séparation des modules. Inspection du châssis conteneur.',
+    step: '3. Dépose des niveaux supérieurs',
+    desc: 'Les dalles et les structures porteuses sont retirées étage par étage, puis les conteneurs sont levés et évacués.',
   },
   {
-    step: '4. Chargement & transport',
-    desc: 'Grue + semi-remorques. Destination : réutilisation sur nouveau site ou centre de reconditionnement.',
+    step: '4. Retrait de la dalle de base',
+    desc: 'Démontage des éléments bois préfabriqués et retrait des interfaces structurelles.',
   },
   {
-    step: '5. Renaturation du site',
-    desc: 'Retrait des fondations (si nécessaire), restauration du sol. Campus peut être utilisé à d\'autres fins.',
+    step: '5. Libération du site',
+    desc: 'Les plots préfabriqués peuvent être retirés rapidement, permettant une remise en état légère et une réversibilité du foncier.',
   },
 ];
 
 const reuse = [
   {
-    scenario: 'Réutilisation sur nouveau site',
-    timeline: '2–3 ans',
-    capex: '-30%',
-    desc: 'Le coût d\'installation est divisé par 1.5 (modules déjà aménagés). Réaménagement minimaliste.',
+    scenario: 'Relocalisation complète',
+    timeline: 'Rapide',
+    capex: 'Très favorable',
+    desc: 'Les modules peuvent être démontés puis remontés sur un autre site avec peu de transformations, ce qui donne au projet une vraie dimension réversible.',
   },
   {
-    scenario: 'Reconditionnement & amélioration',
-    timeline: '6–12 mois',
-    capex: '+15–20%',
-    desc: 'Remplacement d\'équipements, mise à jour de l\'isolation ou des systèmes. Seconde vie identique.',
+    scenario: 'Extension progressive',
+    timeline: 'Par étapes',
+    capex: 'Maîtrisé',
+    desc: 'Le campus peut être agrandi module par module, sans repenser l’ensemble du système ni engager une nouvelle opération lourde.',
   },
   {
-    scenario: 'Valorisation de matériaux',
-    timeline: 'continu',
-    capex: '+5–10% du coût matière',
-    desc: 'Acier récupéré, menuiseries, tuyauterie, électricité. Marché de l\'occasion robuste.',
+    scenario: 'Réaffectation fonctionnelle',
+    timeline: 'Flexible',
+    capex: 'Modéré',
+    desc: 'Un module initialement prévu pour le logement peut être réinterprété en espace de service, coworking ou usage temporaire selon les besoins du site.',
   },
   {
-    scenario: 'Stockage intermédiaire',
-    timeline: 'illimité',
-    capex: '-5%',
-    desc: 'Park conteneurs en attente de nouvel usage. Stockage agricole ou industriel temporaire. Reversible.',
+    scenario: 'Démontage et stockage',
+    timeline: 'Possible',
+    capex: 'Intermédiaire',
+    desc: 'Le système peut être mis en attente entre deux implantations, ce qui reste plus souple qu’un bâtiment classique définitivement attaché à son terrain.',
   },
 ];
+
+const videoEmbedUrl = 'LIEN_VIDEO_EMBED';
 
 export default function Logistique() {
   return (
     <div className="page-enter">
       <PageHero
-        tag="Logistique & Planning"
-        title="Du terrain vierge aux premiers emménagements"
-        subtitle="La rapidité est l'un des avantages majeurs de La Ruche. Voyez comment un campus peut être déployé en 10–12 semaines."
+        tag="Logistique & Montage"
+        title="Un chantier pensé comme un assemblage"
+        subtitle="La Ruche repose sur la préfabrication maximale des dalles, des structures porteuses et des conteneurs. Le travail sur site est donc réduit à l’assemblage, aux raccordements et aux contrôles."
       />
 
       <div className="section-divider" />
 
       <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '5rem 1.5rem' }}>
         <SectionHeader
-          tag="Chronologie détaillée"
-          title="Six phases de déploiement"
-          subtitle="Chaque phase s'enchaîne logiquement, avec parallélisation possible sur certains tâches."
+          tag="Principe général"
+          title="Un montage rapide grâce à la préfabrication"
+          subtitle="Le système est conçu comme un jeu de construction à grande échelle : les éléments arrivent préfabriqués, puis sont assemblés sur site avec un minimum d’opérations lourdes."
         />
+
+        <div
+          style={{
+            background: 'rgba(74,222,128,0.06)',
+            border: '1px solid rgba(74,222,128,0.15)',
+            borderRadius: '10px',
+            padding: '1.25rem',
+            marginBottom: '2rem',
+          }}
+        >
+          <div style={{ color: '#4ADE80', fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.4rem' }}>
+            Hypothèses retenues
+          </div>
+          <div style={{ color: '#A7C9A0', fontSize: '0.84rem', lineHeight: 1.7 }}>
+            Le montage suppose un accès poids lourds, une grue mobile disponible et un terrain globalement propre. L’équipe type comprend 1 chef(fe) de chantier, 1 grutier, 3 à 5 monteurs/assembleurs et 1 à 2 technicien(ne)s fluides/électricité.
+          </div>
+        </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
           {phases.map((p, i) => (
@@ -279,8 +298,60 @@ export default function Logistique() {
 
       <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '5rem 1.5rem' }}>
         <SectionHeader
+          tag="Vidéo"
+          title="Visualiser le principe d’assemblage"
+          subtitle="Remplace simplement le lien ci-dessous par le lien embed de ta vidéo."
+          centered
+        />
+
+        <div
+          style={{
+            background: '#0F1A0B',
+            border: '1px solid rgba(245,158,11,0.1)',
+            borderRadius: '14px',
+            overflow: 'hidden',
+          }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.75rem',
+              padding: '1rem 1.25rem',
+              borderBottom: '1px solid rgba(245,158,11,0.08)',
+              background: 'rgba(245,158,11,0.04)',
+            }}
+          >
+            <PlayCircle size={18} style={{ color: '#F59E0B' }} />
+            <div style={{ color: '#F0FDF4', fontWeight: 700, fontSize: '0.92rem' }}>
+              Démonstration du montage d’un module
+            </div>
+          </div>
+
+          <div style={{ aspectRatio: '16 / 9', background: '#111A0F' }}>
+            <iframe
+              src={videoEmbedUrl}
+              title="Vidéo de montage du module"
+              style={{ width: '100%', height: '100%', border: 'none', display: 'block' }}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          </div>
+
+          <div style={{ padding: '1rem 1.25rem' }}>
+            <div style={{ color: '#A7C9A0', fontSize: '0.84rem', lineHeight: 1.6 }}>
+              Cette vidéo peut illustrer l’assemblage successif des plots, de la dalle, des structures porteuses, des conteneurs, puis de la toiture photovoltaïque.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div className="section-divider" style={{ maxWidth: '1280px', margin: '0 auto' }} />
+
+      <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '5rem 1.5rem' }}>
+        <SectionHeader
           tag="Ressources"
-          title="Ce qu'il faut pour déployer La Ruche"
+          title="Ce qu’il faut pour déployer La Ruche"
           centered
         />
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1rem' }}>
@@ -319,8 +390,8 @@ export default function Logistique() {
 
       <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '5rem 1.5rem' }}>
         <SectionHeader
-          tag="Timeline complète"
-          title="Du terrain vierge à l'occupancy"
+          tag="Timeline"
+          title="Du terrain propre au module opérationnel"
         />
 
         <div style={{ background: '#0F1A0B', border: '1px solid rgba(245,158,11,0.08)', borderRadius: '12px', padding: '2rem' }}>
@@ -352,10 +423,13 @@ export default function Logistique() {
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
               <Clock size={18} style={{ color: '#4ADE80' }} />
-              <span style={{ color: '#4ADE80', fontWeight: 700, fontSize: '0.95rem' }}>Total : 10–12 semaines</span>
+              <span style={{ color: '#4ADE80', fontWeight: 700, fontSize: '0.95rem' }}>18 jours ouvrés bruts</span>
             </div>
-            <div style={{ color: '#A7C9A0', fontSize: '0.82rem', lineHeight: 1.65 }}>
-              Contre 3–5 ans pour une résidence classique. Gain de temps : -85%.
+            <div style={{ color: '#A7C9A0', fontSize: '0.82rem', lineHeight: 1.65, marginBottom: '0.6rem' }}>
+              En intégrant les opérations simultanées et les tâches parallélisables, le temps cible ramené par module est d’environ 10 jours.
+            </div>
+            <div style={{ color: '#F59E0B', fontSize: '0.82rem', fontWeight: 700 }}>
+              La valeur ajoutée du projet vient donc autant de la préfabrication que du produit lui-même.
             </div>
           </div>
         </div>
@@ -365,9 +439,9 @@ export default function Logistique() {
 
       <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '5rem 1.5rem' }}>
         <SectionHeader
-          tag="Fin de vie & réversibilité"
-          title="Le démontage"
-          subtitle="La modularité signifie aussi la réversibilité : la Ruche peut être démantelée et repositionnée ailleurs."
+          tag="Réversibilité"
+          title="Le démontage fait partie du projet"
+          subtitle="La Ruche n’est pas pensée comme un bâtiment figé, mais comme une infrastructure réversible capable d’être déplacée, reconfigurée ou réaffectée."
         />
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'start' }}>
@@ -414,10 +488,10 @@ export default function Logistique() {
               }}
             >
               <div style={{ color: '#4ADE80', fontWeight: 700, fontSize: '0.9rem', marginBottom: '0.375rem' }}>
-                Durée du démontage : 4–6 semaines
+                Démontage estimé : environ 10 jours
               </div>
               <div style={{ color: '#A7C9A0', fontSize: '0.82rem', lineHeight: 1.6 }}>
-                Comparable au déploiement. Les conteneurs peuvent être réutilisés en bon état 5–10 fois.
+                Le démontage est plus rapide que le montage, car il n’y a pas de mise en service ni de réglages fins comparables à la phase initiale.
               </div>
             </div>
           </div>
@@ -429,19 +503,40 @@ export default function Logistique() {
             />
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {reuse.map((scenario, i) => (
-                <div key={i} style={{
-                  background: '#0F1A0B',
-                  border: '1px solid rgba(245,158,11,0.1)',
-                  borderRadius: '8px',
-                  padding: '1.25rem',
-                }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '0.75rem' }}>
+                <div
+                  key={i}
+                  style={{
+                    background: '#0F1A0B',
+                    border: '1px solid rgba(245,158,11,0.1)',
+                    borderRadius: '8px',
+                    padding: '1.25rem',
+                  }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', marginBottom: '0.75rem', gap: '1rem' }}>
                     <div style={{ color: '#F0FDF4', fontWeight: 700, fontSize: '0.9rem' }}>{scenario.scenario}</div>
-                    <div style={{ display: 'flex', gap: '0.5rem' }}>
-                      <span style={{ background: 'rgba(74,222,128,0.1)', color: '#4ADE80', padding: '0.2rem 0.6rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 700 }}>
+                    <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', justifyContent: 'flex-end' }}>
+                      <span
+                        style={{
+                          background: 'rgba(74,222,128,0.1)',
+                          color: '#4ADE80',
+                          padding: '0.2rem 0.6rem',
+                          borderRadius: '4px',
+                          fontSize: '0.75rem',
+                          fontWeight: 700,
+                        }}
+                      >
                         {scenario.timeline}
                       </span>
-                      <span style={{ background: 'rgba(245,158,11,0.1)', color: '#F59E0B', padding: '0.2rem 0.6rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 700 }}>
+                      <span
+                        style={{
+                          background: 'rgba(245,158,11,0.1)',
+                          color: '#F59E0B',
+                          padding: '0.2rem 0.6rem',
+                          borderRadius: '4px',
+                          fontSize: '0.75rem',
+                          fontWeight: 700,
+                        }}
+                      >
                         {scenario.capex}
                       </span>
                     </div>
@@ -457,10 +552,10 @@ export default function Logistique() {
       <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 1.5rem 5rem' }}>
         <StatGrid
           stats={[
-            { value: '10–12 sem.', label: 'Temps de déploiement', sub: '50 logements type', color: 'green' },
-            { value: '-85%', label: 'vs. construction neuve', sub: 'même ampleur', color: 'amber' },
-            { value: '~100%', label: 'Taux de réutilisation', sub: 'conteneurs & matériaux', color: 'green' },
-            { value: '4–6 sem.', label: 'Démontage & relogement', sub: 'site complètement libéré', color: 'amber' },
+            { value: '18 j', label: 'Montage brut', sub: 'module complet', color: 'green' },
+            { value: '10 j', label: 'Montage optimisé', sub: 'avec opérations simultanées', color: 'amber' },
+            { value: '10 j', label: 'Démontage estimé', sub: 'module standard', color: 'green' },
+            { value: '0 gros terrassement', label: 'Principe chantier', sub: 'plots + assemblage sec', color: 'amber' },
           ]}
         />
       </section>
