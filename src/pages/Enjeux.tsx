@@ -1,4 +1,4 @@
-import { AlertTriangle, TrendingUp, Leaf, Users, Home, Clock } from 'lucide-react';
+import { AlertTriangle, TrendingUp, Leaf, Users, Home, Clock, Car } from 'lucide-react';
 import PageHero from '../components/PageHero';
 import SectionHeader from '../components/SectionHeader';
 import StatGrid from '../components/StatGrid';
@@ -6,78 +6,96 @@ import StatGrid from '../components/StatGrid';
 const challenges = [
   {
     icon: <Home size={20} />,
-    title: 'Pénurie de logements',
-    desc: 'Les grandes villes universitaires font face à une pénurie structurelle. Le parc de logements étudiants est insuffisant : en France, on compte seulement 1 logement Crous pour 11 étudiants.',
-    stat: '1 pour 11',
-    statLabel: 'logement Crous / étudiants',
+    title: 'Pénurie de logements étudiants',
+    desc: 'Le besoin en logement étudiant est structurellement supérieur à l’offre disponible. En France, le parc Crous ne couvre qu’une faible part des besoins, ce qui pousse une grande partie des étudiants vers le parc privé, souvent plus cher et moins accessible.',
+    stat: '340 000',
+    statLabel: 'places Crous env.',
   },
   {
     icon: <TrendingUp size={20} />,
-    title: 'Coûts prohibitifs',
-    desc: 'Les loyers en zones universitaires ont augmenté de +35% en 10 ans. Le logement représente désormais le premier poste de dépenses pour 68% des étudiants, pesant sur leur réussite académique.',
-    stat: '+35%',
-    statLabel: 'hausse des loyers en 10 ans',
+    title: 'Loyers trop élevés',
+    desc: 'Le logement est devenu le premier poste de dépense pour une grande partie des étudiants. Dans les villes universitaires, les loyers pèsent directement sur la réussite académique, la mobilité et l’égalité d’accès aux études.',
+    stat: '≤ 400€',
+    statLabel: 'objectif loyer La Ruche',
   },
   {
     icon: <Clock size={20} />,
     title: 'Délais de construction trop longs',
-    desc: 'Les résidences universitaires classiques nécessitent 3 à 5 ans de conception, instruction et chantier. Les besoins sont immédiats et évolutifs — les campus ferment, ouvrent, déménagent.',
-    stat: '3–5 ans',
-    statLabel: 'délai moyen construction',
+    desc: 'Une résidence classique demande souvent plusieurs années entre la conception, les autorisations et le chantier. Or les besoins des campus évoluent vite : augmentation des effectifs, nouveaux partenariats, mobilité internationale, saturation ponctuelle.',
+    stat: '18 jours',
+    statLabel: 'montage brut d’un module',
   },
   {
     icon: <Leaf size={20} />,
-    title: 'Impact environnemental',
-    desc: 'Le secteur du bâtiment représente 40% des émissions de CO₂ en Europe. La construction neuve standard génère des volumes massifs de déchets et consomme des ressources non renouvelables.',
-    stat: '40%',
-    statLabel: 'des émissions CO₂ du bâtiment',
+    title: 'Enjeu environnemental du bâtiment',
+    desc: 'La construction neuve mobilise beaucoup de matière, de temps de chantier et de ressources. La Ruche cherche à réduire cet impact grâce au réemploi des conteneurs, à la préfabrication, à la démontabilité et à un système énergétique partiellement autonome.',
+    stat: '20 conteneurs',
+    statLabel: 'réemployés / module',
   },
   {
-    icon: <AlertTriangle size={20} />,
-    title: 'Inadaptation aux nouveaux usages',
-    desc: 'Les étudiants attendent des espaces de vie communautaires, connectés, modulables. Les logements traditionnels, isolés et standardisés, ne correspondent plus aux modes de vie actuels.',
-    stat: '78%',
-    statLabel: 'insatisfaits de leur logement',
+    icon: <Car size={20} />,
+    title: 'Saturation des parkings et mobilité subie',
+    desc: 'Faute de logements proches, beaucoup d’étudiants viennent en voiture. Cela entraîne une saturation rapide des parkings des écoles et des stationnements autour des campus, accentuant congestion, stress quotidien et impact environnemental.',
+    stat: '1 besoin',
+    statLabel: 'loger plus près du campus',
   },
   {
     icon: <Users size={20} />,
-    title: 'Inégalités d\'accès',
-    desc: 'Les étudiants issus de milieux modestes, en mobilité internationale ou en alternance rencontrent des obstacles spécifiques. Le manque de flexibilité des baux aggrave la précarité.',
-    stat: '25%',
-    statLabel: 'des étudiants en situation précaire',
+    title: 'Besoins étudiants plus variés',
+    desc: 'Tous les étudiants n’ont pas le même rythme ni les mêmes contraintes : alternants, doctorants, étudiants internationaux, mobilités courtes ou longues. Le logement standardisé ne répond plus à cette diversité de profils et d’usages.',
+    stat: '40 étudiants',
+    statLabel: 'par module logement',
   },
 ];
 
 const motivations = [
   {
     num: '01',
-    title: 'Répondre vite',
-    desc: 'La Ruche peut être déployée en 6 à 8 semaines là où une résidence classique prend des années. Le besoin est là maintenant.',
+    title: 'Répondre vite à un besoin immédiat',
+    desc: 'La Ruche est pensée pour être montée rapidement grâce à la préfabrication des dalles, des structures porteuses et des conteneurs. Là où une résidence classique exige un chantier long, notre solution cherche à répondre à une tension immédiate du terrain.',
   },
   {
     num: '02',
-    title: 'Construire durable',
-    desc: 'En réutilisant des conteneurs maritimes déclassés et en intégrant des systèmes énergétiques passifs, chaque module a un bilan carbone radicalement réduit.',
+    title: 'Créer une solution réellement modulaire',
+    desc: 'Le projet ne consiste pas à dessiner un bâtiment unique, mais à concevoir un système reproductible. Chaque école peut choisir le nombre et le type de modules en fonction de ses besoins réels.',
   },
   {
     num: '03',
-    title: 'Penser collectif',
-    desc: 'La forme hexagonale et le concept de ruche ne sont pas qu\'esthétiques — ils symbolisent et structurent une vie collective, collaborative, efficiente.',
+    title: 'Réduire l’impact environnemental',
+    desc: 'Le réemploi des conteneurs, le chantier sec, la démontabilité, la mutualisation des espaces et l’intégration photovoltaïque permettent d’inscrire le projet dans une logique d’innovation responsable plutôt que de construction lourde classique.',
   },
   {
     num: '04',
-    title: 'S\'adapter en permanence',
-    desc: 'Un campus peut grandir, se reconfigurer, se déplacer. La modularité est au cœur du système : on ajoute, on retire, on réoriente les modules selon l\'évolution des besoins.',
+    title: 'Penser le campus comme un écosystème',
+    desc: 'La Ruche ne se limite pas au logement. Le projet intègre des espaces de restauration, d’étude, de services, de mobilité et de vie commune. L’objectif est d’améliorer le quotidien étudiant dans son ensemble.',
   },
   {
     num: '05',
-    title: 'Rendre accessible',
-    desc: 'Un modèle économique pensé pour maintenir des loyers étudiants en dessous de 350–450€/mois tout en assurant la rentabilité pour les opérateurs.',
+    title: 'Rester accessible économiquement',
+    desc: 'Le modèle est construit pour maintenir un loyer cible autour de 350 à 400 € par mois, tout en restant viable pour les établissements qui financent les modules et attractif pour des investisseurs qui financent l’industrialisation.',
   },
   {
     num: '06',
-    title: 'Créer un modèle réplicable',
-    desc: 'La Ruche n\'est pas un prototype unique — c\'est un système exportable, standardisé mais flexible, qui peut s\'adapter à n\'importe quel territoire et établissement.',
+    title: 'Conserver une réversibilité réelle',
+    desc: 'Un module peut être démonté, déplacé, réaffecté ou étendu. Cette capacité de transformation est au cœur du projet : elle évite de figer une réponse lourde sur plusieurs décennies alors que les besoins peuvent évoluer.',
+  },
+];
+
+const opportunityBlocks = [
+  {
+    title: 'Pour les écoles',
+    desc: 'Une solution déployable rapidement, mutualisable entre établissements, avec un ROI d’environ 5,7 ans à partir des loyers étudiants.',
+    metric: '5,7 ans',
+  },
+  {
+    title: 'Pour les étudiants',
+    desc: 'Un logement plus proche du campus, moins dépendant de la voiture, intégré à des services communs et pensé pour des usages réels.',
+    metric: '350–400€',
+  },
+  {
+    title: 'Pour les investisseurs',
+    desc: 'Un produit industrialisable sur un marché en tension, avec un modèle duplicable et un potentiel de croissance à l’échelle de plusieurs campus.',
+    metric: 'x5 à x7',
   },
 ];
 
@@ -87,7 +105,7 @@ export default function Enjeux() {
       <PageHero
         tag="Enjeux & Motivations"
         title="Pourquoi La Ruche ?"
-        subtitle="La crise du logement étudiant est structurelle, urgente et multidimensionnelle. Nous avons conçu une réponse à la hauteur de ces défis."
+        subtitle="La crise du logement étudiant ne se résume pas à un manque de lits : elle touche aussi la mobilité, le coût de la vie, l’attractivité des écoles et l’impact environnemental du campus."
         accentWord="Ruche"
       />
 
@@ -95,9 +113,9 @@ export default function Enjeux() {
 
       <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '5rem 1.5rem' }}>
         <SectionHeader
-          tag="Les défis"
-          title="Un marché du logement étudiant en crise"
-          subtitle="Six problèmes majeurs justifient l'urgence d'une solution innovante et systémique."
+          tag="Les enjeux"
+          title="Une problématique plus large qu’un simple manque de logements"
+          subtitle="Le projet répond à plusieurs tensions simultanées : logement, coût, mobilité, délais de construction et impact environnemental."
         />
 
         <div
@@ -145,10 +163,10 @@ export default function Enjeux() {
       <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '5rem 1.5rem' }}>
         <StatGrid
           stats={[
-            { value: '2.9M', label: 'Étudiants en France', sub: 'hors alternants', color: 'amber' },
-            { value: '340 000', label: 'Places Crous disponibles', sub: 'pour tous les étudiants', color: 'green' },
-            { value: '1.2M', label: 'Besoin estimé', sub: 'nouveaux logements d\'ici 2030', color: 'amber' },
-            { value: '12%', label: 'Budget national logement', sub: 'consacré aux étudiants', color: 'green' },
+            { value: '2,9 M', label: 'Étudiants en France', sub: 'ordre de grandeur', color: 'amber' },
+            { value: '340 000', label: 'Places Crous', sub: 'offre insuffisante', color: 'green' },
+            { value: '700 000', label: 'Demande retenue', sub: 'hypothèse de marché prudente', color: 'amber' },
+            { value: '105', label: 'Modules visés en 6 ans', sub: 'scénario de croissance', color: 'green' },
           ]}
         />
       </section>
@@ -157,9 +175,56 @@ export default function Enjeux() {
 
       <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '5rem 1.5rem' }}>
         <SectionHeader
+          tag="Pourquoi agir maintenant ?"
+          title="Le logement étudiant agit aussi sur la mobilité et la vie du campus"
+          subtitle="Quand les étudiants ne trouvent pas à se loger près de leur établissement, les conséquences dépassent largement la question du logement."
+        />
+
+        <div
+          style={{
+            background: '#0F1A0B',
+            border: '1px solid rgba(245,158,11,0.1)',
+            borderRadius: '12px',
+            padding: '1.5rem',
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: '2rem',
+          }}
+        >
+          <div>
+            <div style={{ color: '#F59E0B', fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.75rem' }}>
+              Effets observés aujourd’hui
+            </div>
+            <ul style={{ margin: 0, paddingLeft: '1rem', color: '#A7C9A0', lineHeight: 1.8, fontSize: '0.86rem' }}>
+              <li>trajets domicile-campus plus longs et plus coûteux ;</li>
+              <li>recours accru à la voiture individuelle ;</li>
+              <li>saturation des parkings des écoles et des rues voisines ;</li>
+              <li>fatigue, stress, retards et baisse du confort étudiant ;</li>
+              <li>difficulté à attirer des profils internationaux ou temporaires.</li>
+            </ul>
+          </div>
+          <div>
+            <div style={{ color: '#4ADE80', fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.75rem' }}>
+              Ce que propose La Ruche
+            </div>
+            <ul style={{ margin: 0, paddingLeft: '1rem', color: '#A7C9A0', lineHeight: 1.8, fontSize: '0.86rem' }}>
+              <li>rapprocher les étudiants du campus ;</li>
+              <li>réduire la pression sur les parkings et les accès ;</li>
+              <li>mutualiser logement, services et espaces communs ;</li>
+              <li>déployer rapidement une réponse évolutive ;</li>
+              <li>mieux adapter la capacité d’accueil aux besoins réels.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <div className="section-divider" style={{ maxWidth: '1280px', margin: '0 auto' }} />
+
+      <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '5rem 1.5rem' }}>
+        <SectionHeader
           tag="Nos motivations"
-          title="Pourquoi nous avons imaginé La Ruche"
-          subtitle="Six raisons fondamentales qui ont guidé la conception de ce projet d'innovation."
+          title="Les principes qui ont guidé la conception de La Ruche"
+          subtitle="Le projet n’a pas été pensé comme un simple bâtiment, mais comme une réponse systémique à un besoin local, concret et urgent."
         />
 
         <div style={{ display: 'grid', gap: 0 }}>
@@ -200,6 +265,47 @@ export default function Enjeux() {
         </div>
       </section>
 
+      <div className="section-divider" style={{ maxWidth: '1280px', margin: '0 auto' }} />
+
+      <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '5rem 1.5rem' }}>
+        <SectionHeader
+          tag="Opportunité"
+          title="Pourquoi le projet a du sens pour tous les acteurs"
+          subtitle="La Ruche articule un intérêt social, territorial, environnemental et économique."
+          centered
+        />
+
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: '1rem',
+          }}
+        >
+          {opportunityBlocks.map((item, i) => (
+            <div
+              key={i}
+              style={{
+                background: '#0F1A0B',
+                border: '1px solid rgba(245,158,11,0.1)',
+                borderRadius: '10px',
+                padding: '1.25rem',
+              }}
+            >
+              <div style={{ color: '#F59E0B', fontWeight: 700, fontSize: '0.9rem', marginBottom: '0.45rem' }}>
+                {item.title}
+              </div>
+              <div style={{ color: '#F0FDF4', fontWeight: 800, fontSize: '1.3rem', marginBottom: '0.45rem' }}>
+                {item.metric}
+              </div>
+              <div style={{ color: '#A7C9A0', fontSize: '0.84rem', lineHeight: 1.65 }}>
+                {item.desc}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <section
         style={{
           background: 'linear-gradient(135deg, rgba(74,222,128,0.05) 0%, rgba(245,158,11,0.05) 100%)',
@@ -208,7 +314,16 @@ export default function Enjeux() {
         }}
       >
         <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-          <span className="tag" style={{ marginBottom: '1.25rem', display: 'inline-block', borderColor: 'rgba(74,222,128,0.35)', color: '#4ADE80', background: 'rgba(74,222,128,0.08)' }}>
+          <span
+            className="tag"
+            style={{
+              marginBottom: '1.25rem',
+              display: 'inline-block',
+              borderColor: 'rgba(74,222,128,0.35)',
+              color: '#4ADE80',
+              background: 'rgba(74,222,128,0.08)',
+            }}
+          >
             Notre vision
           </span>
           <blockquote
@@ -221,7 +336,7 @@ export default function Enjeux() {
               margin: 0,
             }}
           >
-            "La Ruche n'est pas seulement un logement étudiant — c'est une nouvelle manière de concevoir la vie collective, la durabilité et la flexibilité dans l'espace urbain et péri-urbain."
+            "La Ruche n’est pas seulement un logement étudiant : c’est une manière plus rapide, plus réversible et plus durable de rapprocher les étudiants de leur campus, tout en soulageant la pression sur la ville et sur les infrastructures existantes."
           </blockquote>
         </div>
       </section>
