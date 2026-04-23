@@ -1,97 +1,146 @@
-import { Leaf, Droplet, Zap, BarChart3, Wind, Sprout } from 'lucide-react';
+import { Leaf, Droplet, Zap, BarChart3, Wind, Sprout, Recycle, Sun } from 'lucide-react';
 import PageHero from '../components/PageHero';
 import SectionHeader from '../components/SectionHeader';
 import StatGrid from '../components/StatGrid';
 
 const impacts = [
   {
+    icon: <Recycle size={20} />,
+    title: 'Réemploi de matière',
+    metric: '20',
+    vs: 'conteneurs réemployés / module',
+    desc: 'Chaque module logement réutilise 20 conteneurs maritimes 40 pieds. Le projet évite ainsi une partie de la production d’une structure neuve lourde et s’inscrit dans une logique d’économie circulaire.',
+  },
+  {
     icon: <BarChart3 size={20} />,
-    title: 'Bilan carbone en phase chantier',
-    metric: '-60%',
-    vs: 'vs. construction neuve',
-    desc: 'Réutilisation de conteneurs existants vs. production de matériaux neufs. Pas de décapage de terrain, excavation minimale.',
+    title: 'Chantier sec et démontable',
+    metric: '18 j',
+    vs: 'montage brut d’un module',
+    desc: 'La préfabrication des dalles, des structures porteuses et des conteneurs réduit fortement les nuisances, les déchets de chantier et la durée d’intervention sur site par rapport à une opération classique.',
+  },
+  {
+    icon: <Sun size={20} />,
+    title: 'Production photovoltaïque',
+    metric: '49,5 kWc',
+    vs: 'par module logement',
+    desc: 'La toiture supérieure reçoit un champ photovoltaïque d’environ 110 panneaux. Cette production ne rend pas le module autonome en hiver, mais elle réduit significativement les consommations réseau.',
   },
   {
     icon: <Zap size={20} />,
-    title: 'Consommation énergétique annuelle',
-    metric: '~45 kWh',
-    vs: 'par m² chauffé',
-    desc: 'Isolation performante + PAC air/air + VMC double flux. Bien en-dessous des standards conventionnels.',
-  },
-  {
-    icon: <Droplet size={20} />,
-    title: 'Consommation d\'eau',
-    metric: '-40%',
-    vs: 'vs. résidence classique',
-    desc: 'Toilettes sèches optionnelles, robinetterie débitée (6 L/min), récupération d\'eau de pluie en option.',
+    title: 'Besoin énergétique hivernal',
+    metric: '~200 kWh/j',
+    vs: 'par module logement',
+    desc: 'Pour 20 conteneurs et 40 étudiants, le besoin électrique journalier en hiver reste contenu grâce à l’isolation, à la PAC mutualisée et à la VMC double flux.',
   },
   {
     icon: <Wind size={20} />,
-    title: 'Émissions en exploitation (30 ans)',
-    metric: '~2,5 tCO₂e',
-    vs: 'par unité par an',
-    desc: 'Chauffage efficace + énergies renouvelables (option solaire thermique). Facteur électricité française = 0,06 kg CO₂/kWh.',
+    title: 'Ventilation performante',
+    metric: '81%',
+    vs: 'rendement VMC double flux',
+    desc: 'Le poste renouvellement d’air représente la part la plus importante des déperditions. La récupération de chaleur est donc un levier environnemental majeur du projet.',
+  },
+  {
+    icon: <Droplet size={20} />,
+    title: 'Sobriété en eau',
+    metric: 'Mutualisée',
+    vs: 'sanitaires et usages communs',
+    desc: 'La centralisation des réseaux, la compacité des logements et la mutualisation d’une partie des usages rendent le projet plus favorable à une gestion raisonnée de l’eau qu’un ensemble dispersé de logements indépendants.',
   },
 ];
 
 const lifecycle = [
-  { phase: 'Production matériaux', pct: 35, color: '#EF4444' },
-  { phase: 'Transport & logistique', pct: 8, color: '#F97316' },
-  { phase: 'Construction & montage', pct: 12, color: '#FBBF24' },
-  { phase: 'Exploitation (30 ans)', pct: 40, color: '#EAB308' },
-  { phase: 'Démolition & fin de vie', pct: 5, color: '#84CC16' },
+  { phase: 'Réemploi / structure existante', pct: 25, color: '#22C55E' },
+  { phase: 'Transport & logistique', pct: 12, color: '#F97316' },
+  { phase: 'Montage & chantier', pct: 8, color: '#FBBF24' },
+  { phase: 'Exploitation énergétique', pct: 45, color: '#EAB308' },
+  { phase: 'Maintenance & remplacement', pct: 10, color: '#84CC16' },
 ];
 
 const materials = [
   {
-    name: 'Conteneur acier réutilisé',
-    desc: 'Acier usagé, absence de production neuve. Le conteneur a déjà « payé » son empreinte carbone lors de sa première vie.',
-    carbon: 'Amortissable',
+    name: 'Conteneurs maritimes réemployés',
+    desc: 'Le projet s’appuie sur des conteneurs existants, transformés en logements et en modules de service. Le réemploi constitue l’un des principaux leviers environnementaux de La Ruche.',
+    carbon: 'Réemploi',
     icon: '📦',
   },
   {
-    name: 'Isolant polyuréthane haute densité',
-    desc: 'Excellente performance thermique avec peu de matière (60 mm = 3,5 R). Substitue des épaisseurs plus importantes d\'autres isolants.',
-    carbon: '2–3 kg CO₂/m²',
+    name: 'Dalles et structure porteuse démontables',
+    desc: 'Les dalles bois et les structures treillis sont conçues pour être assemblées, démontées puis potentiellement réutilisées. La matière est concentrée là où elle est structurellement utile.',
+    carbon: 'Réversible',
+    icon: '🪵',
+  },
+  {
+    name: 'Isolation dimensionnée pour la RE2020',
+    desc: 'La laine de verre et le parement intérieur permettent d’atteindre des résistances thermiques cohérentes avec la RE2020 tout en restant compatibles avec la préfabrication.',
+    carbon: '10 / 17 / 9 cm',
     icon: '🛡️',
   },
   {
-    name: 'Bardage bois composite',
-    desc: 'Bois reconstitué ou issu de forêts gérées. Aspect naturel, durabilité 30+ ans, fin de vie valorisable.',
-    carbon: '1–2 kg CO₂/m²',
-    icon: '🌳',
-  },
-  {
-    name: 'Menuiseries triple vitrage',
-    desc: 'PVC recyclable ou aluminium à rupture thermique. Durée de vie 40–50 ans, performances énergétiques justifient l\'impact initial.',
-    carbon: '4–5 kg CO₂/m²',
-    icon: '🪟',
+    name: 'Toiture productive',
+    desc: 'La toiture supérieure ne protège pas seulement le bâtiment : elle supporte aussi le champ photovoltaïque, ce qui augmente la valeur d’usage de la surface construite.',
+    carbon: '49,5 kWc',
+    icon: '☀️',
   },
 ];
 
 const biodiversity = [
   {
-    title: 'Toitures végétalisées',
-    desc: 'Substrat extensif 5–8 cm accueillant fleurs sauvages, sédums, insectes pollinisateurs. Inertie thermique + habitat urbain.',
+    title: 'Jardins collaboratifs',
+    desc: 'Les interstices entre modules peuvent accueillir des jardins partagés, créant des usages sociaux et pédagogiques tout en désimperméabilisant partiellement le campus.',
   },
   {
-    title: 'Jardins partagés',
-    desc: 'Espaces entre hexagones aménagés en jardins pédagogiques (permaculture, aromatiques, fruits). Lien au vivant pour les étudiants.',
+    title: 'Ruches et pollinisateurs',
+    desc: 'L’identité du projet peut être prolongée par de vraies ruches, dans un cadre adapté, ainsi que par des plantations favorables aux pollinisateurs.',
   },
   {
-    title: 'Corridors écologiques',
-    desc: 'Plantations de haies, arbres, passages pour petite faune. Connexion avec trames vertes locales et continuités biologiques.',
+    title: 'Patios et sols moins minéraux',
+    desc: 'Le pavage du campus permet de ménager des respirations végétales entre les modules, plutôt que de reproduire un ensemble entièrement minéral.',
   },
   {
-    title: 'Zéro déchet en exploitation',
-    desc: 'Tri à la source, compostage sur site, réduction du plastique. Programme zéro déchet porté par la communauté étudiante.',
+    title: 'Confort d’usage et vivant',
+    desc: 'L’ambition du projet n’est pas seulement de réduire un impact, mais aussi de créer un cadre de vie plus apaisé, plus ombragé et plus connecté au vivant.',
   },
 ];
 
 const certifications = [
-  { name: 'HQE Bâtiment', desc: 'Haute Qualité Environnementale — cible 12 cibles. Thermique, eau, déchets, santé.', icon: '✓' },
-  { name: 'RE2020', desc: 'Réglementation Environnementale française — niveau 2 minimum visé. Consommation énergétique & confort.', icon: '✓' },
-  { name: 'BREEAM', desc: 'Building Research Establishment Environmental Assessment Method — certification possible à titre optionnel.', icon: '◆' },
+  {
+    name: 'RE2020',
+    desc: 'Référence environnementale principale retenue pour l’enveloppe et les performances thermiques du projet.',
+    icon: '✓',
+  },
+  {
+    name: 'Économie circulaire',
+    desc: 'Le projet est construit autour du réemploi, de la démontabilité et de la relocalisation des modules plutôt que d’un bâtiment figé.',
+    icon: '◆',
+  },
+  {
+    name: 'Innovation responsable',
+    desc: 'La Ruche cherche à répondre à un besoin fondamental — se loger près du campus — avec une solution adaptable, industrialisable et plus sobre.',
+    icon: '✓',
+  },
+];
+
+const waterEnergyLinks = [
+  {
+    title: 'PAC mutualisée',
+    desc: 'Une seule pompe à chaleur par module permet de mutualiser le chauffage et l’ECS pour 40 étudiants, en limitant la multiplication des équipements.',
+    metric: '16–18 kW',
+  },
+  {
+    title: 'Stockage batterie intermédiaire',
+    desc: 'Le parc batterie de 229 kWh n’a pas pour but l’autonomie totale, mais l’optimisation de l’autoconsommation et la réduction des appels réseau.',
+    metric: '229 kWh',
+  },
+  {
+    title: 'Production solaire journalière',
+    desc: 'La production moyenne d’environ 68 kWh/j permet de couvrir une part significative des besoins, même si le système reste hybride en hiver.',
+    metric: '~68 kWh/j',
+  },
+  {
+    title: 'Appoint réseau hivernal',
+    desc: 'Le besoin réseau restant est assumé : le projet ne cherche pas l’autonomie absolue à tout prix, mais un compromis réaliste entre performance et coût.',
+    metric: '~132 kWh/j',
+  },
 ];
 
 export default function Environnement() {
@@ -99,8 +148,8 @@ export default function Environnement() {
     <div className="page-enter">
       <PageHero
         tag="Étude Environnementale"
-        title="L'impact de La Ruche sur le climat"
-        subtitle="De la réutilisation des conteneurs à l'exploitation énergétique, chaque décision est pensée pour minimiser l'empreinte carbone et créer un environnement sain."
+        title="Un impact réduit par la conception, pas par le discours"
+        subtitle="La Ruche combine réemploi, préfabrication, démontabilité, isolation performante et production photovoltaïque pour proposer une réponse plus sobre qu’une construction étudiante classique."
       />
 
       <div className="section-divider" />
@@ -108,7 +157,8 @@ export default function Environnement() {
       <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '5rem 1.5rem' }}>
         <SectionHeader
           tag="Indicateurs clés"
-          title="Les chiffres de la durabilité"
+          title="Ce qui rend La Ruche plus sobre"
+          subtitle="L’intérêt environnemental du projet ne repose pas sur un seul levier, mais sur l’addition de plusieurs choix cohérents."
           centered
         />
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1rem' }}>
@@ -148,9 +198,9 @@ export default function Environnement() {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'start' }}>
           <div>
             <SectionHeader
-              tag="Cycle de vie"
-              title="Bilan carbone sur 30 ans"
-              subtitle="Répartition des émissions CO₂ sur l'ensemble du cycle de vie d'un module logement."
+              tag="Lecture cycle de vie"
+              title="Où se situe l’impact du projet ?"
+              subtitle="Cette répartition ne remplace pas une ACV réglementaire complète, mais elle aide à visualiser les grands postes d’impact du module."
             />
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               {lifecycle.map((item, i) => (
@@ -175,10 +225,10 @@ export default function Environnement() {
               }}
             >
               <div style={{ color: '#4ADE80', fontWeight: 700, fontSize: '0.9rem', marginBottom: '0.375rem' }}>
-                Total : ~65–75 tCO₂e par unité
+                Lecture principale
               </div>
               <div style={{ color: '#A7C9A0', fontSize: '0.82rem', lineHeight: 1.6 }}>
-                Soit 2,2–2,5 tCO₂e/an en moyenne. 60% en-dessous d'une résidence classique (construction neuve + exploitation).
+                Le projet réduit surtout l’impact initial de construction grâce au réemploi et au chantier sec. En exploitation, l’effort porte sur l’isolation, la PAC mutualisée, la VMC double flux et le champ photovoltaïque.
               </div>
             </div>
           </div>
@@ -186,7 +236,7 @@ export default function Environnement() {
           <div>
             <SectionHeader
               tag="Matériaux"
-              title="Choix responsables"
+              title="Des choix cohérents avec la logique du projet"
             />
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {materials.map((mat, i) => (
@@ -210,9 +260,59 @@ export default function Environnement() {
 
       <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '5rem 1.5rem' }}>
         <SectionHeader
-          tag="Biodiversité"
-          title="Un campus vivant"
-          subtitle="Au-delà du bilan carbone, La Ruche intègre des stratégies de résilience écologique et de connexion au vivant."
+          tag="Énergie & ressources"
+          title="Une sobriété assumée plutôt qu’une autonomie fictive"
+          subtitle="Le projet ne prétend pas être totalement autonome : il cherche un bon compromis entre performance, réalisme technique et coût."
+          centered
+        />
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1rem' }}>
+          {waterEnergyLinks.map((item, i) => (
+            <div
+              key={i}
+              style={{
+                background: '#0F1A0B',
+                border: '1px solid rgba(245,158,11,0.1)',
+                borderRadius: '10px',
+                padding: '1.25rem',
+              }}
+            >
+              <div style={{ color: '#F59E0B', fontWeight: 700, fontSize: '0.84rem', marginBottom: '0.45rem' }}>{item.title}</div>
+              <div style={{ color: '#F0FDF4', fontWeight: 800, fontSize: '1.3rem', marginBottom: '0.45rem' }}>
+                {item.metric}
+              </div>
+              <div style={{ color: '#A7C9A0', fontSize: '0.82rem', lineHeight: 1.6 }}>
+                {item.desc}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div
+          style={{
+            marginTop: '1.5rem',
+            background: 'rgba(245,158,11,0.04)',
+            border: '1px solid rgba(245,158,11,0.1)',
+            borderRadius: '10px',
+            padding: '1.25rem',
+          }}
+        >
+          <div style={{ color: '#F0FDF4', fontWeight: 700, fontSize: '0.92rem', marginBottom: '0.45rem' }}>
+            Positionnement environnemental du projet
+          </div>
+          <div style={{ color: '#A7C9A0', fontSize: '0.84rem', lineHeight: 1.65 }}>
+            L’intérêt environnemental de La Ruche ne repose pas sur une promesse exagérée d’autonomie totale. Il repose sur un ensemble cohérent de décisions : logement plus proche du campus, moins de déplacements contraints, réduction des temps de chantier, réemploi des modules, et baisse des besoins énergétiques grâce à une enveloppe correctement dimensionnée.
+          </div>
+        </div>
+      </section>
+
+      <div className="section-divider" style={{ maxWidth: '1280px', margin: '0 auto' }} />
+
+      <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '5rem 1.5rem' }}>
+        <SectionHeader
+          tag="Biodiversité & cadre de vie"
+          title="Un campus plus vivant, pas seulement plus efficace"
+          subtitle="L’environnement ne se limite pas au carbone : il concerne aussi la qualité des sols, du paysage, de l’eau et du quotidien étudiant."
           centered
         />
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1rem' }}>
@@ -233,10 +333,10 @@ export default function Environnement() {
       <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '5rem 1.5rem' }}>
         <StatGrid
           stats={[
-            { value: '~70 tCO₂e', label: 'Bilan carbone total', sub: 'par unité sur 30 ans', color: 'amber' },
-            { value: '-60%', label: 'vs. construction neuve', sub: 'même durée de vie', color: 'green' },
-            { value: '45 kWh/m²', label: 'Conso. énergétique', sub: 'chauffage + ECS annuelle', color: 'amber' },
-            { value: '100%', label: 'Fin de vie', sub: 'acier & matériaux recyclables', color: 'green' },
+            { value: '20', label: 'Conteneurs réemployés', sub: 'par module logement', color: 'amber' },
+            { value: '49,5 kWc', label: 'Champ photovoltaïque', sub: 'par module', color: 'green' },
+            { value: '229 kWh', label: 'Stockage batterie', sub: 'ordre de grandeur retenu', color: 'amber' },
+            { value: 'RE2020', label: 'Référence visée', sub: 'pour l’enveloppe', color: 'green' },
           ]}
         />
       </section>
@@ -250,19 +350,22 @@ export default function Environnement() {
       >
         <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
           <SectionHeader
-            tag="Certifications & normes"
-            title="Conformité environnementale"
+            tag="Références & positionnement"
+            title="Cadre environnemental du projet"
             centered
           />
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1rem' }}>
             {certifications.map((cert, i) => (
-              <div key={i} style={{
-                background: 'rgba(245,158,11,0.04)',
-                border: '1px solid rgba(245,158,11,0.1)',
-                borderRadius: '8px',
-                padding: '1.5rem',
-                textAlign: 'center',
-              }}>
+              <div
+                key={i}
+                style={{
+                  background: 'rgba(245,158,11,0.04)',
+                  border: '1px solid rgba(245,158,11,0.1)',
+                  borderRadius: '8px',
+                  padding: '1.5rem',
+                  textAlign: 'center',
+                }}
+              >
                 <div style={{ color: '#F59E0B', fontSize: '1.5rem', fontWeight: 800, marginBottom: '0.5rem' }}>
                   {cert.icon}
                 </div>
