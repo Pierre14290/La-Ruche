@@ -19,13 +19,13 @@ import StatGrid from '../components/StatGrid';
 
 const summarySlides = [
   {
-    title: 'Synthèse des logements',
-    desc: 'Slide de résumé pour présenter les logements, l’aménagement et le choix du conteneur 40 pieds.',
-    src: 'LIEN_DIAPO_LOGEMENTS_1',
+    /*title: 'Synthèse des logements',*/
+    /*desc: 'Slide de résumé pour présenter les logements, l’aménagement et le choix du conteneur 40 pieds.',*/
+    src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1777502254/Capture_d_%C3%A9cran_2026-04-29_232549_kbgibu.png',
   },
   {
-    title: 'Thermique et énergie',
-    desc: 'Slide complémentaire sur les déperditions, la PAC, le bilan énergétique et le champ photovoltaïque.',
+    /*title: 'Thermique et énergie',*/
+    /*desc: 'Slide complémentaire sur les déperditions, la PAC, le bilan énergétique et le champ photovoltaïque.',*/
     src: 'LIEN_DIAPO_LOGEMENTS_2',
   },
 ];
@@ -356,7 +356,7 @@ export default function Logements() {
       <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '4rem 1.5rem 5rem' }}>
         <SectionHeader
           tag="Support de présentation"
-          title="Diapositive de synthèse"
+          /*title="Diapositive de synthèse"*/
           /*subtitle="← / → : changer de diapo · F : plein écran · Échap : quitter"*/
           centered
         />
