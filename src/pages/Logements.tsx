@@ -357,7 +357,7 @@ export default function Logements() {
         <SectionHeader
           tag="Support de présentation"
           title="Diapositive de synthèse"
-          subtitle="← / → : changer de diapo · F : plein écran · Échap : quitter"
+          /*subtitle="← / → : changer de diapo · F : plein écran · Échap : quitter"*/
           centered
         />
 
