@@ -7,9 +7,12 @@ const navItems: NavItem[] = [
   { id: 'enjeux', label: 'Enjeux' },
   { id: 'campus', label: 'Le Campus' },
   { id: 'logements', label: 'Logements' },
+  { id: 'concurrence', label: 'Veille concurrencielle' },
   { id: 'environnement', label: 'Environnement' },
+  { id: 'protection', label: 'Protection intellectuelle' },
   { id: 'financier', label: 'Finances' },
   { id: 'logistique', label: 'Logistique' },
+  { id: 'ensuite', label: 'Et ensuite ?' },
 ];
 
 interface NavigationProps {
