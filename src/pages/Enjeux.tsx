@@ -17,8 +17,8 @@ import StatGrid from '../components/StatGrid';
 
 const summarySlides = [
   {
-    title: 'Synthèse des enjeux',
-    desc: 'Slide de résumé pour introduire la page Enjeux.',
+    /*title: 'Synthèse des enjeux',*/
+    /*desc: 'Slide de résumé pour introduire la page Enjeux.',*/
     src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1777468018/Capture_d_%C3%A9cran_2026-04-29_150452_r1tbsz.png',
   },
   {
@@ -202,7 +202,7 @@ export default function Enjeux() {
       <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '4rem 1.5rem 5rem' }}>
         <SectionHeader
           tag="Support de présentation"
-          title="Diapositive de synthèse"
+          /*title="Diapositive de synthèse"*/
           /*subtitle="← / → : changer de diapo · F : plein écran · Échap : quitter"*/
           centered
         />
