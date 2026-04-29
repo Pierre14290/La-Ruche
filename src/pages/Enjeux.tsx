@@ -1,7 +1,33 @@
-import { AlertTriangle, TrendingUp, Leaf, Users, Home, Clock, Car } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import {
+  AlertTriangle,
+  TrendingUp,
+  Leaf,
+  Users,
+  Home,
+  Clock,
+  Car,
+  ChevronLeft,
+  ChevronRight,
+  Maximize2,
+  X,
+} from 'lucide-react';
 import PageHero from '../components/PageHero';
 import SectionHeader from '../components/SectionHeader';
 import StatGrid from '../components/StatGrid';
+
+const summarySlides = [
+  {
+    title: 'Synthèse des enjeux',
+    desc: 'Slide de résumé pour introduire la page Enjeux.',
+    src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1756477751/%C3%89toile_3_dqku4q.png',
+  },
+  {
+    title: 'Problématique logement + mobilité',
+    desc: 'Slide complémentaire sur le lien entre logement, parking et mobilité subie.',
+    src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1756477728/%C3%89toile_2_uem1kp.png',
+  },
+];
 
 const challenges = [
   {
@@ -41,9 +67,9 @@ const challenges = [
   },
   {
     icon: <Users size={20} />,
-    title: 'Besoins étudiants plus variés',
-    desc: 'Tous les étudiants n’ont pas le même rythme ni les mêmes contraintes : alternants, doctorants, étudiants internationaux, mobilités courtes ou longues. Le logement standardisé ne répond plus à cette diversité de profils et d’usages.',
-    stat: '40 étudiants',
+    title: 'Besoins plus variés',
+    desc: 'Étudiants, alternants, doctorants, enseignants et intervenants extérieurs n’ont pas les mêmes durées de présence. Le logement doit donc pouvoir répondre à des usages longs, courts et temporaires.',
+    stat: '40 personnes',
     statLabel: 'par module logement',
   },
 ];
@@ -57,7 +83,7 @@ const motivations = [
   {
     num: '02',
     title: 'Créer une solution réellement modulaire',
-    desc: 'Le projet ne consiste pas à dessiner un bâtiment unique, mais à concevoir un système reproductible. Chaque école peut choisir le nombre et le type de modules en fonction de ses besoins réels.',
+    desc: 'Le projet ne consiste pas à dessiner un bâtiment unique, mais à concevoir un système reproductible. Les acteurs du projet peuvent choisir le nombre et le type de modules en fonction des besoins réels du territoire.',
   },
   {
     num: '03',
@@ -67,12 +93,12 @@ const motivations = [
   {
     num: '04',
     title: 'Penser le campus comme un écosystème',
-    desc: 'La Ruche ne se limite pas au logement. Le projet intègre des espaces de restauration, d’étude, de services, de mobilité et de vie commune. L’objectif est d’améliorer le quotidien étudiant dans son ensemble.',
+    desc: 'La Ruche ne se limite pas au logement. Le projet intègre des espaces de restauration, d’étude, de services, de mobilité et de vie commune. L’objectif est d’améliorer le quotidien des usagers dans son ensemble.',
   },
   {
     num: '05',
     title: 'Rester accessible économiquement',
-    desc: 'Le modèle est construit pour maintenir un loyer cible autour de 350 à 400 € par mois, tout en restant viable pour les établissements qui financent les modules et attractif pour des investisseurs qui financent l’industrialisation.',
+    desc: 'Le modèle est construit pour maintenir un loyer cible autour de 350 à 400 € par mois, tout en restant viable pour les partenaires publics et privés qui financent le déploiement.',
   },
   {
     num: '06',
@@ -83,23 +109,51 @@ const motivations = [
 
 const opportunityBlocks = [
   {
-    title: 'Pour les écoles',
-    desc: 'Une solution déployable rapidement, mutualisable entre établissements, avec un ROI d’environ 5,7 ans à partir des loyers étudiants.',
-    metric: '5,7 ans',
+    title: 'Pour les collectivités',
+    desc: 'Une réponse rapide à la pénurie de logements, avec une solution réversible, adaptable et plus légère qu’un programme immobilier classique.',
+    metric: 'foncier optimisé',
   },
   {
-    title: 'Pour les étudiants',
-    desc: 'Un logement plus proche du campus, moins dépendant de la voiture, intégré à des services communs et pensé pour des usages réels.',
+    title: 'Pour les usagers',
+    desc: 'Un logement plus proche du campus, moins dépendant de la voiture, intégré à des services communs et pensé pour différents temps de présence.',
     metric: '350–400€',
   },
   {
-    title: 'Pour les investisseurs',
-    desc: 'Un produit industrialisable sur un marché en tension, avec un modèle duplicable et un potentiel de croissance à l’échelle de plusieurs campus.',
-    metric: 'x5 à x7',
+    title: 'Pour les partenaires privés',
+    desc: 'Un produit industrialisable sur un marché en tension, avec un modèle duplicable à l’échelle de plusieurs campus.',
+    metric: 'modèle hybride',
   },
 ];
 
 export default function Enjeux() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [fullscreenSlide, setFullscreenSlide] = useState<null | {
+    title: string;
+    desc: string;
+    src: string;
+  }>(null);
+
+  const goPreviousSlide = () => {
+    setCurrentSlide((prev) => (prev === 0 ? summarySlides.length - 1 : prev - 1));
+  };
+
+  const goNextSlide = () => {
+    setCurrentSlide((prev) => (prev === summarySlides.length - 1 ? 0 : prev + 1));
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') goPreviousSlide();
+      if (e.key === 'ArrowRight') goNextSlide();
+      if (e.key === 'Escape') setFullscreenSlide(null);
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  const activeSlide = summarySlides[currentSlide];
+
   return (
     <div className="page-enter">
       <PageHero
@@ -110,6 +164,133 @@ export default function Enjeux() {
       />
 
       <div className="section-divider" />
+
+      <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '4rem 1.5rem 5rem' }}>
+        <SectionHeader
+          tag="Support de présentation"
+          title="Diapositive de synthèse"
+          subtitle="Utilise les flèches gauche et droite du clavier pour faire défiler les diapositives de cette page."
+          centered
+        />
+
+        <div
+          style={{
+            background: '#0F1A0B',
+            border: '1px solid rgba(245,158,11,0.12)',
+            borderRadius: '16px',
+            overflow: 'hidden',
+            boxShadow: '0 20px 60px rgba(0,0,0,0.18)',
+          }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              gap: '1rem',
+              padding: '1rem 1.25rem',
+              borderBottom: '1px solid rgba(245,158,11,0.08)',
+              background: 'rgba(245,158,11,0.04)',
+            }}
+          >
+            <div>
+              <div style={{ color: '#F0FDF4', fontWeight: 700, fontSize: '1rem', marginBottom: '0.2rem' }}>
+                {activeSlide.title}
+              </div>
+              <div style={{ color: '#A7C9A0', fontSize: '0.82rem' }}>
+                {activeSlide.desc}
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0 }}>
+              <button
+                onClick={goPreviousSlide}
+                style={{
+                  width: 38,
+                  height: 38,
+                  borderRadius: '999px',
+                  border: '1px solid rgba(245,158,11,0.16)',
+                  background: 'rgba(245,158,11,0.06)',
+                  color: '#F0FDF4',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <ChevronLeft size={18} />
+              </button>
+
+              <div style={{ color: '#F59E0B', fontWeight: 700, fontSize: '0.85rem', minWidth: 48, textAlign: 'center' }}>
+                {currentSlide + 1} / {summarySlides.length}
+              </div>
+
+              <button
+                onClick={goNextSlide}
+                style={{
+                  width: 38,
+                  height: 38,
+                  borderRadius: '999px',
+                  border: '1px solid rgba(245,158,11,0.16)',
+                  background: 'rgba(245,158,11,0.06)',
+                  color: '#F0FDF4',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <ChevronRight size={18} />
+              </button>
+
+              <button
+                onClick={() => setFullscreenSlide(activeSlide)}
+                style={{
+                  width: 38,
+                  height: 38,
+                  borderRadius: '999px',
+                  border: '1px solid rgba(245,158,11,0.16)',
+                  background: 'rgba(245,158,11,0.06)',
+                  color: '#F0FDF4',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Maximize2 size={16} />
+              </button>
+            </div>
+          </div>
+
+          <button
+            onClick={() => setFullscreenSlide(activeSlide)}
+            style={{
+              width: '100%',
+              padding: 0,
+              border: 'none',
+              background: '#111A0F',
+              cursor: 'pointer',
+              display: 'block',
+            }}
+          >
+            <div style={{ aspectRatio: '16 / 9', background: '#111A0F' }}>
+              <img
+                src={activeSlide.src}
+                alt={activeSlide.title}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'contain',
+                  display: 'block',
+                }}
+              />
+            </div>
+          </button>
+        </div>
+      </section>
+
+      <div className="section-divider" style={{ maxWidth: '1280px', margin: '0 auto' }} />
 
       <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '5rem 1.5rem' }}>
         <SectionHeader
@@ -176,8 +357,8 @@ export default function Enjeux() {
       <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '5rem 1.5rem' }}>
         <SectionHeader
           tag="Pourquoi agir maintenant ?"
-          title="Le logement étudiant agit aussi sur la mobilité et la vie du campus"
-          subtitle="Quand les étudiants ne trouvent pas à se loger près de leur établissement, les conséquences dépassent largement la question du logement."
+          title="Le logement agit aussi sur la mobilité et la vie du campus"
+          subtitle="Quand les usagers ne trouvent pas à se loger près de leur établissement, les conséquences dépassent largement la question du logement."
         />
 
         <div
@@ -200,7 +381,7 @@ export default function Enjeux() {
               <li>recours accru à la voiture individuelle ;</li>
               <li>saturation des parkings des écoles et des rues voisines ;</li>
               <li>fatigue, stress, retards et baisse du confort étudiant ;</li>
-              <li>difficulté à attirer des profils internationaux ou temporaires.</li>
+              <li>difficulté à accueillir des profils internationaux ou temporaires.</li>
             </ul>
           </div>
           <div>
@@ -208,7 +389,7 @@ export default function Enjeux() {
               Ce que propose La Ruche
             </div>
             <ul style={{ margin: 0, paddingLeft: '1rem', color: '#A7C9A0', lineHeight: 1.8, fontSize: '0.86rem' }}>
-              <li>rapprocher les étudiants du campus ;</li>
+              <li>rapprocher les usagers du campus ;</li>
               <li>réduire la pression sur les parkings et les accès ;</li>
               <li>mutualiser logement, services et espaces communs ;</li>
               <li>déployer rapidement une réponse évolutive ;</li>
@@ -336,10 +517,88 @@ export default function Enjeux() {
               margin: 0,
             }}
           >
-            "La Ruche n’est pas seulement un logement étudiant : c’est une manière plus rapide, plus réversible et plus durable de rapprocher les étudiants de leur campus, tout en soulageant la pression sur la ville et sur les infrastructures existantes."
+            "La Ruche n’est pas seulement un logement étudiant : c’est une manière plus rapide, plus réversible et plus durable de rapprocher les usagers de leur campus, tout en soulageant la pression sur la ville et sur les infrastructures existantes."
           </blockquote>
         </div>
       </section>
+
+      {fullscreenSlide && (
+        <div
+          onClick={() => setFullscreenSlide(null)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(0,0,0,0.88)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '2rem',
+            zIndex: 9999,
+            backdropFilter: 'blur(4px)',
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              width: 'min(1400px, 96vw)',
+              maxHeight: '94vh',
+              background: '#0F1A0B',
+              border: '1px solid rgba(245,158,11,0.18)',
+              borderRadius: '16px',
+              overflow: 'hidden',
+              boxShadow: '0 24px 80px rgba(0,0,0,0.45)',
+            }}
+          >
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: '1rem',
+                padding: '1rem 1.1rem',
+                borderBottom: '1px solid rgba(245,158,11,0.08)',
+              }}
+            >
+              <div>
+                <div style={{ color: '#F0FDF4', fontWeight: 700, fontSize: '1rem', marginBottom: '0.2rem' }}>
+                  {fullscreenSlide.title}
+                </div>
+                <div style={{ color: '#A7C9A0', fontSize: '0.82rem' }}>{fullscreenSlide.desc}</div>
+              </div>
+              <button
+                onClick={() => setFullscreenSlide(null)}
+                style={{
+                  width: 40,
+                  height: 40,
+                  borderRadius: '999px',
+                  border: '1px solid rgba(245,158,11,0.15)',
+                  background: 'rgba(245,158,11,0.06)',
+                  color: '#F0FDF4',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  flexShrink: 0,
+                }}
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            <div style={{ background: '#111A0F', maxHeight: 'calc(94vh - 84px)', overflow: 'auto' }}>
+              <img
+                src={fullscreenSlide.src}
+                alt={fullscreenSlide.title}
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  display: 'block',
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
