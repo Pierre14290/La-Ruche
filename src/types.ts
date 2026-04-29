@@ -7,6 +7,8 @@ export type Page =
   | 'financier'
   | 'logistique';
   | 'concurrence';
+  | 'protection';
+  | 'etensuite';
 
 export interface NavItem {
   id: Page;
