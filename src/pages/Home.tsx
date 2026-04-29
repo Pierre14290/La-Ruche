@@ -94,9 +94,9 @@ export default function Home({ onNavigate }: HomeProps) {
           </div>
 
           <h1 className="hero-title" style={{ marginBottom: '1rem' }}>
-            <span style={{ color: '#F0FDF4' }}>LA</span>
+            <span style={{ color: '#F0FDF4' }}>LA</span><span style={{ color: '#F59E0B' }}> RUCHE campus</span>
             <br />
-            <span style={{ color: '#F59E0B' }}>RUCHE campus</span>
+            <span style={{ color: '#F59E0B' }}>campus</span>
           </h1>
 
           <p
