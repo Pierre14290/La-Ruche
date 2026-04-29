@@ -19,7 +19,7 @@ const summarySlides = [
   {
     /*title: 'Synthèse des enjeux',*/
     /*desc: 'Slide de résumé pour introduire la page Enjeux.',*/
-    src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1777497647/Capture_d_%C3%A9cran_2026-04-29_232037_jaktwm.png',
+    src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1777498262/Capture_d_%C3%A9cran_2026-04-29_232454_rdpfli.png',
   },
 ];
 
