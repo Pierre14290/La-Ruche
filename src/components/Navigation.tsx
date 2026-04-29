@@ -47,7 +47,7 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
           >
             <HexLogo />
             <span style={{ color: '#F59E0B', fontWeight: 800, fontSize: '1.25rem', letterSpacing: '-0.03em' }}>
-              La Ruche
+              La Ruche campus
             </span>
           </button>
 
