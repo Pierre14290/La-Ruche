@@ -34,7 +34,7 @@ function App() {
         return <Financier />;
       case 'logistique':
         return <Logistique />;
-      case 'Concurrence':
+      case 'concurrence':
         return <Concurrence />;
       default:
         return <Home onNavigate={handleNavigate} />;
