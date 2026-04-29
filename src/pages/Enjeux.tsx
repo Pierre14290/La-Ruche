@@ -575,7 +575,7 @@ export default function Enjeux() {
                 style={{
                   width: '100%',
                   height: 'auto',
-                  display: 'block',
+                  objectFit: 'contain',
                 }}
               />
             </div>
