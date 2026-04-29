@@ -21,14 +21,14 @@ import StatGrid from '../components/StatGrid';
 
 const summarySlides = [
   {
-    title: 'Synthèse des perspectives',
-    desc: 'Slide de résumé pour présenter les évolutions possibles de La Ruche après le premier démonstrateur.',
-    src: 'LIEN_DIAPO_ET_ENSUITE_1',
+    /*title: 'Synthèse des perspectives',*/
+    /*desc: 'Slide de résumé pour présenter les évolutions possibles de La Ruche après le premier démonstrateur.',*/
+    src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1777505196/Capture_d_%C3%A9cran_2026-04-30_012623_etqbzf.png',
   },
   {
-    title: 'Feuille de route de développement',
-    desc: 'Slide complémentaire sur le passage du prototype au déploiement multi-campus.',
-    src: 'LIEN_DIAPO_ET_ENSUITE_2',
+    /*title: 'Feuille de route de développement',*/
+    /*desc: 'Slide complémentaire sur le passage du prototype au déploiement multi-campus.',*/
+    src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1777505198/Capture_d_%C3%A9cran_2026-04-29_232749_iffojs.png',
   },
 ];
 
@@ -236,8 +236,8 @@ export default function EtEnsuite() {
       <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '4rem 1.5rem 5rem' }}>
         <SectionHeader
           tag="Support de présentation"
-          title="Diapositive de synthèse"
-          subtitle="← / → : changer de diapo · F : plein écran · Échap : quitter"
+          /*title="Diapositive de synthèse"*/
+          /*subtitle="← / → : changer de diapo · F : plein écran · Échap : quitter"*/
           centered
         />
 
