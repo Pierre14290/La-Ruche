@@ -14,14 +14,19 @@ import StatGrid from '../components/StatGrid';
 
 const summarySlides = [
   {
-    title: 'Synthèse du campus',
-    desc: 'Slide de résumé pour présenter le principe général du campus.',
-    src: 'LIEN_DIAPO_CAMPUS_1',
+    /*title: 'Synthèse du campus',*/
+    /*desc: 'Slide de résumé pour présenter le principe général du campus.',*/
+    src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1777501786/Capture_d_%C3%A9cran_2026-04-29_232507_khjzbr.png',
   },
   {
-    title: 'Organisation modulaire',
-    desc: 'Slide complémentaire sur le pavage, les modules et la logique d’extension.',
-    src: 'LIEN_DIAPO_CAMPUS_2',
+    /*title: 'Organisation modulaire',*/
+    /*desc: 'Slide complémentaire sur le pavage, les modules et la logique d’extension.',*/
+    src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1777501789/Capture_d_%C3%A9cran_2026-04-29_232517_z7tolu.png',
+  },
+  {
+    /*title: 'Organisation modulaire',*/
+    /*desc: 'Slide complémentaire sur le pavage, les modules et la logique d’extension.',*/
+    src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1777501917/Capture_d_%C3%A9cran_2026-04-30_003059_ky3aev.png',
   },
 ];
 
@@ -230,7 +235,7 @@ export default function Campus() {
       <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '4rem 1.5rem 5rem' }}>
         <SectionHeader
           tag="Support de présentation"
-          title="Diapositive de synthèse"
+          /*title="Diapositive de synthèse"*/
           /*subtitle="← / → : changer de diapo · F : plein écran · Échap : quitter"*/
           centered
         />
