@@ -9,6 +9,7 @@ import Logements from './pages/Logements';
 import Environnement from './pages/Environnement';
 import Financier from './pages/Financier';
 import Logistique from './pages/Logistique';
+import Concurrence from './pages/Concurrence';
 
 function App() {
   const [currentPage, setCurrentPage] = useState<Page>('home');
@@ -33,6 +34,8 @@ function App() {
         return <Financier />;
       case 'logistique':
         return <Logistique />;
+      case 'concurrence':
+        return <Concurrence />;
       default:
         return <Home onNavigate={handleNavigate} />;
     }
