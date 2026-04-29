@@ -10,6 +10,8 @@ import Environnement from './pages/Environnement';
 import Financier from './pages/Financier';
 import Logistique from './pages/Logistique';
 import Concurrence from './pages/Concurrence';
+import Protection from './pages/Protection';
+import EtEnsuite from './pages/EtEnsuite';
 
 function App() {
   const [currentPage, setCurrentPage] = useState<Page>('home');
@@ -36,6 +38,10 @@ function App() {
         return <Logistique />;
       case 'concurrence':
         return <Concurrence />;
+      case 'protection':
+        return <Protection />;
+      case 'etensuite':
+        return <EtEnsuite />;
       default:
         return <Home onNavigate={handleNavigate} />;
     }
