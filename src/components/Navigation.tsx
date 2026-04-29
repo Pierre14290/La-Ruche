@@ -9,8 +9,10 @@ const navItems: NavItem[] = [
   { id: 'logements', label: 'Logements' },
   { id: 'concurrence', label: 'Concurrence' },
   { id: 'environnement', label: 'Environnement' },
+  { id: 'protection', label: 'Protection Intellectuelle' },
   { id: 'financier', label: 'Finances' },
   { id: 'logistique', label: 'Logistique' },
+  { id: 'etensuite', label: 'Et Ensuite ?' },
 ];
 
 interface NavigationProps {
