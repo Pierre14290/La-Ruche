@@ -6,7 +6,6 @@ export type Page =
   | 'environnement'
   | 'financier'
   | 'logistique';
-  | 'concurrence';
 
 export interface NavItem {
   id: Page;
