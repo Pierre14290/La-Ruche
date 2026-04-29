@@ -12,7 +12,7 @@ const navItems: NavItem[] = [
   { id: 'protection', label: 'Protection Intellectuelle' },
   { id: 'financier', label: 'Finances' },
   { id: 'logistique', label: 'Logistique' },
-  { id: 'etensuite', label: 'Et Ensuite ?' },
+  { id: 'etensuite', label: 'Ensuite ?' },
 ];
 
 interface NavigationProps {
