@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import {
-  AlertTriangle,
   TrendingUp,
   Leaf,
   Users,
@@ -133,24 +132,59 @@ export default function Enjeux() {
     src: string;
   }>(null);
 
+  const openFullscreen = () => {
+    setFullscreenSlide(summarySlides[currentSlide]);
+  };
+
+  const closeFullscreen = () => {
+    setFullscreenSlide(null);
+  };
+
   const goPreviousSlide = () => {
-    setCurrentSlide((prev) => (prev === 0 ? summarySlides.length - 1 : prev - 1));
+    setCurrentSlide((prev) => {
+      const next = prev === 0 ? summarySlides.length - 1 : prev - 1;
+      if (fullscreenSlide) setFullscreenSlide(summarySlides[next]);
+      return next;
+    });
   };
 
   const goNextSlide = () => {
-    setCurrentSlide((prev) => (prev === summarySlides.length - 1 ? 0 : prev + 1));
+    setCurrentSlide((prev) => {
+      const next = prev === summarySlides.length - 1 ? 0 : prev + 1;
+      if (fullscreenSlide) setFullscreenSlide(summarySlides[next]);
+      return next;
+    });
   };
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft') goPreviousSlide();
-      if (e.key === 'ArrowRight') goNextSlide();
-      if (e.key === 'Escape') setFullscreenSlide(null);
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        goPreviousSlide();
+      }
+
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        goNextSlide();
+      }
+
+      if (e.key === 'f' || e.key === 'F') {
+        e.preventDefault();
+        if (fullscreenSlide) {
+          closeFullscreen();
+        } else {
+          openFullscreen();
+        }
+      }
+
+      if (e.key === 'Escape') {
+        closeFullscreen();
+      }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [fullscreenSlide, currentSlide]);
 
   const activeSlide = summarySlides[currentSlide];
 
@@ -169,7 +203,7 @@ export default function Enjeux() {
         <SectionHeader
           tag="Support de présentation"
           title="Diapositive de synthèse"
-          subtitle="Utilise les flèches gauche et droite du clavier pour faire défiler les diapositives de cette page."
+          subtitle="← / → : changer de diapo · F : plein écran · Échap : quitter"
           centered
         />
 
@@ -203,21 +237,7 @@ export default function Enjeux() {
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0 }}>
-              <button
-                onClick={goPreviousSlide}
-                style={{
-                  width: 38,
-                  height: 38,
-                  borderRadius: '999px',
-                  border: '1px solid rgba(245,158,11,0.16)',
-                  background: 'rgba(245,158,11,0.06)',
-                  color: '#F0FDF4',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
+              <button onClick={goPreviousSlide} style={navButtonStyle}>
                 <ChevronLeft size={18} />
               </button>
 
@@ -225,46 +245,18 @@ export default function Enjeux() {
                 {currentSlide + 1} / {summarySlides.length}
               </div>
 
-              <button
-                onClick={goNextSlide}
-                style={{
-                  width: 38,
-                  height: 38,
-                  borderRadius: '999px',
-                  border: '1px solid rgba(245,158,11,0.16)',
-                  background: 'rgba(245,158,11,0.06)',
-                  color: '#F0FDF4',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
+              <button onClick={goNextSlide} style={navButtonStyle}>
                 <ChevronRight size={18} />
               </button>
 
-              <button
-                onClick={() => setFullscreenSlide(activeSlide)}
-                style={{
-                  width: 38,
-                  height: 38,
-                  borderRadius: '999px',
-                  border: '1px solid rgba(245,158,11,0.16)',
-                  background: 'rgba(245,158,11,0.06)',
-                  color: '#F0FDF4',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
+              <button onClick={openFullscreen} style={navButtonStyle}>
                 <Maximize2 size={16} />
               </button>
             </div>
           </div>
 
           <button
-            onClick={() => setFullscreenSlide(activeSlide)}
+            onClick={openFullscreen}
             style={{
               width: '100%',
               padding: 0,
@@ -524,7 +516,7 @@ export default function Enjeux() {
 
       {fullscreenSlide && (
         <div
-          onClick={() => setFullscreenSlide(null)}
+          onClick={closeFullscreen}
           style={{
             position: 'fixed',
             inset: 0,
@@ -559,28 +551,24 @@ export default function Enjeux() {
                 borderBottom: '1px solid rgba(245,158,11,0.08)',
               }}
             >
-              <div>
+              <button onClick={goPreviousSlide} style={navButtonStyle}>
+                <ChevronLeft size={18} />
+              </button>
+
+              <div style={{ flex: 1 }}>
                 <div style={{ color: '#F0FDF4', fontWeight: 700, fontSize: '1rem', marginBottom: '0.2rem' }}>
                   {fullscreenSlide.title}
                 </div>
-                <div style={{ color: '#A7C9A0', fontSize: '0.82rem' }}>{fullscreenSlide.desc}</div>
+                <div style={{ color: '#A7C9A0', fontSize: '0.82rem' }}>
+                  {fullscreenSlide.desc} · {currentSlide + 1} / {summarySlides.length}
+                </div>
               </div>
-              <button
-                onClick={() => setFullscreenSlide(null)}
-                style={{
-                  width: 40,
-                  height: 40,
-                  borderRadius: '999px',
-                  border: '1px solid rgba(245,158,11,0.15)',
-                  background: 'rgba(245,158,11,0.06)',
-                  color: '#F0FDF4',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  cursor: 'pointer',
-                  flexShrink: 0,
-                }}
-              >
+
+              <button onClick={goNextSlide} style={navButtonStyle}>
+                <ChevronRight size={18} />
+              </button>
+
+              <button onClick={closeFullscreen} style={navButtonStyle}>
                 <X size={18} />
               </button>
             </div>
@@ -602,3 +590,15 @@ export default function Enjeux() {
     </div>
   );
 }
+const navButtonStyle = {
+  width: 38,
+  height: 38,
+  borderRadius: '999px',
+  border: '1px solid rgba(245,158,11,0.16)',
+  background: 'rgba(245,158,11,0.06)',
+  color: '#F0FDF4',
+  cursor: 'pointer',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+} as const;
