@@ -131,22 +131,27 @@ const campusGallery = [
   {
     title: 'Vue aérienne du campus',
     desc: 'Implantation générale des modules et des patios',
-    src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1776769530/21-04-2026_10-52-53_iujmzw.png',
+    src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1777504051/Sims_4_ryjyrg.png',
   },
   {
     title: 'Cœur de vie commun',
     desc: 'Espaces partagés, circulation et convivialité',
-    src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1776769514/21-04-2026_10-52-27_orw65a.png',
+    src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1777504041/Sims_2_qjmjph.png',
   },
   {
     title: 'Module logement type',
     desc: 'Exemple de composition standard sur 4 niveaux',
-    src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1776769544/21-04-2026_10-53-14_z5jfk0.png',
+    src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1777504040/Sims_1_ggx4pj.png',
   },
   {
     title: 'Extension du campus',
     desc: 'Ajout progressif de modules sur la trame hexagonale',
-    src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1776769559/21-04-2026_10-53-04_wrwiaa.png',
+    src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1777504040/Sims_6_q9hmqi.png',
+  },
+  {
+    title: 'Module logement type',
+    desc: 'Exemple de composition standard sur 4 niveaux',
+    src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1777504052/Sims_5_sgeryu.png',
   },
 ];
 
