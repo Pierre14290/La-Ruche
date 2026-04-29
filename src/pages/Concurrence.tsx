@@ -206,8 +206,8 @@ export default function Concurrence() {
     <div className="page-enter">
       <PageHero
         tag="Veille concurrentielle"
-        /*title="Comprendre l’existant pour positionner La Ruche"*/
-        /*subtitle="Les résidences étudiantes actuelles répondent partiellement au besoin : certaines sont accessibles, d’autres confortables, mais peu combinent prix, services, proximité, modularité et rapidité de déploiement."*/
+        title="Comprendre l’existant pour positionner La Ruche"
+        subtitle="Les résidences étudiantes actuelles répondent partiellement au besoin : certaines sont accessibles, d’autres confortables, mais peu combinent prix, services, proximité, modularité et rapidité de déploiement."
       />
 
       <div className="section-divider" />
@@ -215,8 +215,8 @@ export default function Concurrence() {
       <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '4rem 1.5rem 5rem' }}>
         <SectionHeader
           tag="Support de présentation"
-          title="Diapositive de synthèse"
-          subtitle="← / → : changer de diapo · F : plein écran · Échap : quitter"
+          /*title="Diapositive de synthèse"*/
+          /*subtitle="← / → : changer de diapo · F : plein écran · Échap : quitter"*/
           centered
         />
 
