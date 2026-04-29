@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Thermometer,
   Wind,
@@ -10,10 +10,25 @@ import {
   Battery,
   Zap,
   Gauge,
+  ChevronLeft,
+  ChevronRight,
 } from 'lucide-react';
 import PageHero from '../components/PageHero';
 import SectionHeader from '../components/SectionHeader';
 import StatGrid from '../components/StatGrid';
+
+const summarySlides = [
+  {
+    title: 'Synthèse des logements',
+    desc: 'Slide de résumé pour présenter les logements, l’aménagement et le choix du conteneur 40 pieds.',
+    src: 'LIEN_DIAPO_LOGEMENTS_1',
+  },
+  {
+    title: 'Thermique et énergie',
+    desc: 'Slide complémentaire sur les déperditions, la PAC, le bilan énergétique et le champ photovoltaïque.',
+    src: 'LIEN_DIAPO_LOGEMENTS_2',
+  },
+];
 
 const containerChoice = [
   {
@@ -260,11 +275,73 @@ const pvImage = {
 };
 
 export default function Logements() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [fullscreenSlide, setFullscreenSlide] = useState<null | {
+    title: string;
+    desc: string;
+    src: string;
+  }>(null);
+
   const [selectedImage, setSelectedImage] = useState<null | {
     title: string;
     desc: string;
     src: string;
   }>(null);
+
+  const openFullscreen = () => {
+    setFullscreenSlide(summarySlides[currentSlide]);
+  };
+
+  const closeFullscreen = () => {
+    setFullscreenSlide(null);
+  };
+
+  const goPreviousSlide = () => {
+    setCurrentSlide((prev) => {
+      const next = prev === 0 ? summarySlides.length - 1 : prev - 1;
+      if (fullscreenSlide) setFullscreenSlide(summarySlides[next]);
+      return next;
+    });
+  };
+
+  const goNextSlide = () => {
+    setCurrentSlide((prev) => {
+      const next = prev === summarySlides.length - 1 ? 0 : prev + 1;
+      if (fullscreenSlide) setFullscreenSlide(summarySlides[next]);
+      return next;
+    });
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (selectedImage) return;
+
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        goPreviousSlide();
+      }
+
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        goNextSlide();
+      }
+
+      if (e.key === 'f' || e.key === 'F') {
+        e.preventDefault();
+        if (fullscreenSlide) closeFullscreen();
+        else openFullscreen();
+      }
+
+      if (e.key === 'Escape') {
+        closeFullscreen();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [fullscreenSlide, currentSlide, selectedImage]);
+
+  const activeSlide = summarySlides[currentSlide];
 
   return (
     <div className="page-enter">
@@ -275,6 +352,91 @@ export default function Logements() {
       />
 
       <div className="section-divider" />
+
+      <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '4rem 1.5rem 5rem' }}>
+        <SectionHeader
+          tag="Support de présentation"
+          title="Diapositive de synthèse"
+          subtitle="← / → : changer de diapo · F : plein écran · Échap : quitter"
+          centered
+        />
+
+        <div
+          style={{
+            background: '#0F1A0B',
+            border: '1px solid rgba(245,158,11,0.12)',
+            borderRadius: '16px',
+            overflow: 'hidden',
+            boxShadow: '0 20px 60px rgba(0,0,0,0.18)',
+          }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              gap: '1rem',
+              padding: '1rem 1.25rem',
+              borderBottom: '1px solid rgba(245,158,11,0.08)',
+              background: 'rgba(245,158,11,0.04)',
+            }}
+          >
+            <div>
+              <div style={{ color: '#F0FDF4', fontWeight: 700, fontSize: '1rem', marginBottom: '0.2rem' }}>
+                {activeSlide.title}
+              </div>
+              <div style={{ color: '#A7C9A0', fontSize: '0.82rem' }}>
+                {activeSlide.desc}
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0 }}>
+              <button onClick={goPreviousSlide} style={navButtonStyle}>
+                <ChevronLeft size={18} />
+              </button>
+
+              <div style={{ color: '#F59E0B', fontWeight: 700, fontSize: '0.85rem', minWidth: 48, textAlign: 'center' }}>
+                {currentSlide + 1} / {summarySlides.length}
+              </div>
+
+              <button onClick={goNextSlide} style={navButtonStyle}>
+                <ChevronRight size={18} />
+              </button>
+
+              <button onClick={openFullscreen} style={navButtonStyle}>
+                <Maximize2 size={16} />
+              </button>
+            </div>
+          </div>
+
+          <button
+            onClick={openFullscreen}
+            style={{
+              width: '100%',
+              padding: 0,
+              border: 'none',
+              background: '#111A0F',
+              cursor: 'pointer',
+              display: 'block',
+            }}
+          >
+            <div style={{ aspectRatio: '16 / 9', background: '#111A0F' }}>
+              <img
+                src={activeSlide.src}
+                alt={activeSlide.title}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'contain',
+                  display: 'block',
+                }}
+              />
+            </div>
+          </button>
+        </div>
+      </section>
+
+      <div className="section-divider" style={{ maxWidth: '1280px', margin: '0 auto' }} />
 
       <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '5rem 1.5rem' }}>
         <SectionHeader
@@ -933,6 +1095,80 @@ export default function Logements() {
         />
       </section>
 
+      {fullscreenSlide && (
+        <div
+          onClick={closeFullscreen}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(0,0,0,0.88)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '2rem',
+            zIndex: 9999,
+            backdropFilter: 'blur(4px)',
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              width: 'min(1400px, 96vw)',
+              maxHeight: '94vh',
+              background: '#0F1A0B',
+              border: '1px solid rgba(245,158,11,0.18)',
+              borderRadius: '16px',
+              overflow: 'hidden',
+              boxShadow: '0 24px 80px rgba(0,0,0,0.45)',
+            }}
+          >
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: '1rem',
+                padding: '1rem 1.1rem',
+                borderBottom: '1px solid rgba(245,158,11,0.08)',
+              }}
+            >
+              <button onClick={goPreviousSlide} style={navButtonStyle}>
+                <ChevronLeft size={18} />
+              </button>
+
+              <div style={{ flex: 1 }}>
+                <div style={{ color: '#F0FDF4', fontWeight: 700, fontSize: '1rem', marginBottom: '0.2rem' }}>
+                  {fullscreenSlide.title}
+                </div>
+                <div style={{ color: '#A7C9A0', fontSize: '0.82rem' }}>
+                  {fullscreenSlide.desc} · {currentSlide + 1} / {summarySlides.length}
+                </div>
+              </div>
+
+              <button onClick={goNextSlide} style={navButtonStyle}>
+                <ChevronRight size={18} />
+              </button>
+
+              <button onClick={closeFullscreen} style={navButtonStyle}>
+                <X size={18} />
+              </button>
+            </div>
+
+            <div style={{ background: '#111A0F', maxHeight: 'calc(94vh - 84px)', overflow: 'auto' }}>
+              <img
+                src={fullscreenSlide.src}
+                alt={fullscreenSlide.title}
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  display: 'block',
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
       {selectedImage && (
         <div
           onClick={() => setSelectedImage(null)}
@@ -978,33 +1214,12 @@ export default function Logements() {
                   {selectedImage.desc}
                 </div>
               </div>
-              <button
-                onClick={() => setSelectedImage(null)}
-                style={{
-                  width: 40,
-                  height: 40,
-                  borderRadius: '999px',
-                  border: '1px solid rgba(245,158,11,0.15)',
-                  background: 'rgba(245,158,11,0.06)',
-                  color: '#F0FDF4',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  cursor: 'pointer',
-                  flexShrink: 0,
-                }}
-              >
+              <button onClick={() => setSelectedImage(null)} style={navButtonStyle}>
                 <X size={18} />
               </button>
             </div>
 
-            <div
-              style={{
-                background: '#111A0F',
-                maxHeight: 'calc(92vh - 84px)',
-                overflow: 'auto',
-              }}
-            >
+            <div style={{ background: '#111A0F', maxHeight: 'calc(92vh - 84px)', overflow: 'auto' }}>
               <img
                 src={selectedImage.src}
                 alt={selectedImage.title}
@@ -1021,3 +1236,16 @@ export default function Logements() {
     </div>
   );
 }
+
+const navButtonStyle = {
+  width: 38,
+  height: 38,
+  borderRadius: '999px',
+  border: '1px solid rgba(245,158,11,0.16)',
+  background: 'rgba(245,158,11,0.06)',
+  color: '#F0FDF4',
+  cursor: 'pointer',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+} as const;
