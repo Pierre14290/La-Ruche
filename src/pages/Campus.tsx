@@ -1,8 +1,29 @@
-import { useState } from 'react';
-import { Grid2x2 as Grid, Users, Maximize2, ArrowRight, X } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import {
+  Grid2x2 as Grid,
+  Users,
+  Maximize2,
+  ArrowRight,
+  X,
+  ChevronLeft,
+  ChevronRight,
+} from 'lucide-react';
 import PageHero from '../components/PageHero';
 import SectionHeader from '../components/SectionHeader';
 import StatGrid from '../components/StatGrid';
+
+const summarySlides = [
+  {
+    title: 'Synthèse du campus',
+    desc: 'Slide de résumé pour présenter le principe général du campus.',
+    src: 'LIEN_DIAPO_CAMPUS_1',
+  },
+  {
+    title: 'Organisation modulaire',
+    desc: 'Slide complémentaire sur le pavage, les modules et la logique d’extension.',
+    src: 'LIEN_DIAPO_CAMPUS_2',
+  },
+];
 
 const moduleTypes = [
   {
@@ -80,8 +101,8 @@ const targets = [
     icon: '✈️',
   },
   {
-    title: 'Alternants et stagiaires',
-    desc: 'Profils en mobilité temporaire, souvent éloignés de leur domicile, pour lesquels la souplesse d’installation et la rapidité de déploiement sont déterminantes.',
+    title: 'Alternants, enseignants et intervenants',
+    desc: 'Profils en mobilité temporaire, parfois présents seulement quelques jours ou semaines, pour lesquels un logement proche du site représente un vrai gain de confort.',
     icon: '💼',
   },
 ];
@@ -125,11 +146,76 @@ const campusGallery = [
 ];
 
 export default function Campus() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [fullscreenSlide, setFullscreenSlide] = useState<null | {
+    title: string;
+    desc: string;
+    src: string;
+  }>(null);
+
   const [selectedImage, setSelectedImage] = useState<null | {
     title: string;
     desc: string;
     src: string;
   }>(null);
+
+  const openFullscreen = () => {
+    setFullscreenSlide(summarySlides[currentSlide]);
+  };
+
+  const closeFullscreen = () => {
+    setFullscreenSlide(null);
+  };
+
+  const goPreviousSlide = () => {
+    setCurrentSlide((prev) => {
+      const next = prev === 0 ? summarySlides.length - 1 : prev - 1;
+      if (fullscreenSlide) setFullscreenSlide(summarySlides[next]);
+      return next;
+    });
+  };
+
+  const goNextSlide = () => {
+    setCurrentSlide((prev) => {
+      const next = prev === summarySlides.length - 1 ? 0 : prev + 1;
+      if (fullscreenSlide) setFullscreenSlide(summarySlides[next]);
+      return next;
+    });
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (selectedImage) return;
+
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        goPreviousSlide();
+      }
+
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        goNextSlide();
+      }
+
+      if (e.key === 'f' || e.key === 'F') {
+        e.preventDefault();
+        if (fullscreenSlide) {
+          closeFullscreen();
+        } else {
+          openFullscreen();
+        }
+      }
+
+      if (e.key === 'Escape') {
+        closeFullscreen();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [fullscreenSlide, currentSlide, selectedImage]);
+
+  const activeSlide = summarySlides[currentSlide];
 
   return (
     <div className="page-enter">
@@ -140,6 +226,91 @@ export default function Campus() {
       />
 
       <div className="section-divider" />
+
+      <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '4rem 1.5rem 5rem' }}>
+        <SectionHeader
+          tag="Support de présentation"
+          title="Diapositive de synthèse"
+          subtitle="← / → : changer de diapo · F : plein écran · Échap : quitter"
+          centered
+        />
+
+        <div
+          style={{
+            background: '#0F1A0B',
+            border: '1px solid rgba(245,158,11,0.12)',
+            borderRadius: '16px',
+            overflow: 'hidden',
+            boxShadow: '0 20px 60px rgba(0,0,0,0.18)',
+          }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              gap: '1rem',
+              padding: '1rem 1.25rem',
+              borderBottom: '1px solid rgba(245,158,11,0.08)',
+              background: 'rgba(245,158,11,0.04)',
+            }}
+          >
+            <div>
+              <div style={{ color: '#F0FDF4', fontWeight: 700, fontSize: '1rem', marginBottom: '0.2rem' }}>
+                {activeSlide.title}
+              </div>
+              <div style={{ color: '#A7C9A0', fontSize: '0.82rem' }}>
+                {activeSlide.desc}
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0 }}>
+              <button onClick={goPreviousSlide} style={navButtonStyle}>
+                <ChevronLeft size={18} />
+              </button>
+
+              <div style={{ color: '#F59E0B', fontWeight: 700, fontSize: '0.85rem', minWidth: 48, textAlign: 'center' }}>
+                {currentSlide + 1} / {summarySlides.length}
+              </div>
+
+              <button onClick={goNextSlide} style={navButtonStyle}>
+                <ChevronRight size={18} />
+              </button>
+
+              <button onClick={openFullscreen} style={navButtonStyle}>
+                <Maximize2 size={16} />
+              </button>
+            </div>
+          </div>
+
+          <button
+            onClick={openFullscreen}
+            style={{
+              width: '100%',
+              padding: 0,
+              border: 'none',
+              background: '#111A0F',
+              cursor: 'pointer',
+              display: 'block',
+            }}
+          >
+            <div style={{ aspectRatio: '16 / 9', background: '#111A0F' }}>
+              <img
+                src={activeSlide.src}
+                alt={activeSlide.title}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'contain',
+                  display: 'block',
+                }}
+              />
+            </div>
+          </button>
+        </div>
+      </section>
+
+      <div className="section-divider" style={{ maxWidth: '1280px', margin: '0 auto' }} />
 
       <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '5rem 1.5rem' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }}>
@@ -387,7 +558,7 @@ export default function Campus() {
         <StatGrid
           stats={[
             { value: '20', label: 'Conteneurs', sub: 'par module logement standard', color: 'amber' },
-            { value: '40', label: 'Étudiants logés', sub: 'par module logement', color: 'green' },
+            { value: '40', label: 'Personnes logées', sub: 'par module logement', color: 'green' },
             { value: '8 types', label: 'De modules disponibles', sub: 'pour composer le campus', color: 'amber' },
             { value: '10 j', label: 'Montage optimisé', sub: 'par module en opérations simultanées', color: 'green' },
           ]}
@@ -425,6 +596,80 @@ export default function Campus() {
           </button>
         </div>
       </section>
+
+      {fullscreenSlide && (
+        <div
+          onClick={closeFullscreen}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(0,0,0,0.88)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '2rem',
+            zIndex: 9999,
+            backdropFilter: 'blur(4px)',
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              width: 'min(1400px, 96vw)',
+              maxHeight: '94vh',
+              background: '#0F1A0B',
+              border: '1px solid rgba(245,158,11,0.18)',
+              borderRadius: '16px',
+              overflow: 'hidden',
+              boxShadow: '0 24px 80px rgba(0,0,0,0.45)',
+            }}
+          >
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: '1rem',
+                padding: '1rem 1.1rem',
+                borderBottom: '1px solid rgba(245,158,11,0.08)',
+              }}
+            >
+              <button onClick={goPreviousSlide} style={navButtonStyle}>
+                <ChevronLeft size={18} />
+              </button>
+
+              <div style={{ flex: 1 }}>
+                <div style={{ color: '#F0FDF4', fontWeight: 700, fontSize: '1rem', marginBottom: '0.2rem' }}>
+                  {fullscreenSlide.title}
+                </div>
+                <div style={{ color: '#A7C9A0', fontSize: '0.82rem' }}>
+                  {fullscreenSlide.desc} · {currentSlide + 1} / {summarySlides.length}
+                </div>
+              </div>
+
+              <button onClick={goNextSlide} style={navButtonStyle}>
+                <ChevronRight size={18} />
+              </button>
+
+              <button onClick={closeFullscreen} style={navButtonStyle}>
+                <X size={18} />
+              </button>
+            </div>
+
+            <div style={{ background: '#111A0F', maxHeight: 'calc(94vh - 84px)', overflow: 'auto' }}>
+              <img
+                src={fullscreenSlide.src}
+                alt={fullscreenSlide.title}
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  display: 'block',
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      )}
 
       {selectedImage && (
         <div
@@ -467,37 +712,14 @@ export default function Campus() {
                 <div style={{ color: '#F0FDF4', fontWeight: 700, fontSize: '1rem', marginBottom: '0.2rem' }}>
                   {selectedImage.title}
                 </div>
-                <div style={{ color: '#A7C9A0', fontSize: '0.82rem' }}>
-                  {selectedImage.desc}
-                </div>
+                <div style={{ color: '#A7C9A0', fontSize: '0.82rem' }}>{selectedImage.desc}</div>
               </div>
-              <button
-                onClick={() => setSelectedImage(null)}
-                style={{
-                  width: 40,
-                  height: 40,
-                  borderRadius: '999px',
-                  border: '1px solid rgba(245,158,11,0.15)',
-                  background: 'rgba(245,158,11,0.06)',
-                  color: '#F0FDF4',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  cursor: 'pointer',
-                  flexShrink: 0,
-                }}
-              >
+              <button onClick={() => setSelectedImage(null)} style={navButtonStyle}>
                 <X size={18} />
               </button>
             </div>
 
-            <div
-              style={{
-                background: '#111A0F',
-                maxHeight: 'calc(92vh - 84px)',
-                overflow: 'auto',
-              }}
-            >
+            <div style={{ background: '#111A0F', maxHeight: 'calc(92vh - 84px)', overflow: 'auto' }}>
               <img
                 src={selectedImage.src}
                 alt={selectedImage.title}
@@ -623,6 +845,19 @@ function HexCampusVisualization() {
     </div>
   );
 }
+
+const navButtonStyle = {
+  width: 38,
+  height: 38,
+  borderRadius: '999px',
+  border: '1px solid rgba(245,158,11,0.16)',
+  background: 'rgba(245,158,11,0.06)',
+  color: '#F0FDF4',
+  cursor: 'pointer',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+} as const;
 
 function _Grid() { return <Grid size={16} />; }
 function _Users() { return <Users size={16} />; }
