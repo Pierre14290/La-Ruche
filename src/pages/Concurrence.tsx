@@ -19,14 +19,9 @@ import StatGrid from '../components/StatGrid';
 
 const summarySlides = [
   {
-    title: 'Synthèse veille concurrentielle',
-    desc: 'Slide de résumé pour présenter les concurrents, les usages et le positionnement de La Ruche.',
-    src: 'LIEN_DIAPO_CONCURRENCE_1',
-  },
-  {
-    title: 'Positionnement de La Ruche',
-    desc: 'Slide complémentaire sur les limites de l’existant et la valeur ajoutée du projet.',
-    src: 'LIEN_DIAPO_CONCURRENCE_2',
+    /*title: 'Synthèse veille concurrentielle',*/
+    /*desc: 'Slide de résumé pour présenter les concurrents, les usages et le positionnement de La Ruche.',*/
+    src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1777503387/Capture_d_%C3%A9cran_2026-04-29_232630_rwfscw.png',
   },
 ];
 
@@ -211,8 +206,8 @@ export default function Concurrence() {
     <div className="page-enter">
       <PageHero
         tag="Veille concurrentielle"
-        title="Comprendre l’existant pour positionner La Ruche"
-        subtitle="Les résidences étudiantes actuelles répondent partiellement au besoin : certaines sont accessibles, d’autres confortables, mais peu combinent prix, services, proximité, modularité et rapidité de déploiement."
+        /*title="Comprendre l’existant pour positionner La Ruche"*/
+        /*subtitle="Les résidences étudiantes actuelles répondent partiellement au besoin : certaines sont accessibles, d’autres confortables, mais peu combinent prix, services, proximité, modularité et rapidité de déploiement."*/
       />
 
       <div className="section-divider" />
