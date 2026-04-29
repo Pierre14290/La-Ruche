@@ -2,6 +2,29 @@ import { Leaf, Droplet, Zap, BarChart3, Wind, Sprout, Recycle, Sun } from 'lucid
 import PageHero from '../components/PageHero';
 import SectionHeader from '../components/SectionHeader';
 import StatGrid from '../components/StatGrid';
+import { useEffect, useState } from 'react';
+import {
+  Leaf,
+  Droplet,
+  Zap,
+  BarChart3,
+  Wind,
+  Sprout,
+  Recycle,
+  Sun,
+  Maximize2,
+  X,
+  ChevronLeft,
+  ChevronRight,
+} from 'lucide-react';
+
+const summarySlides = [
+  {
+    /*title: 'Synthèse environnementale',*/
+    /*desc: 'Slide de résumé sur le réemploi, l’énergie, la démontabilité et l’économie circulaire.',*/
+    src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1777505790/Capture_d_%C3%A9cran_2026-04-29_232637_hiahsn.png',
+  },
+];
 
 const impacts = [
   {
@@ -144,6 +167,66 @@ const waterEnergyLinks = [
 ];
 
 export default function Environnement() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [fullscreenSlide, setFullscreenSlide] = useState<null | {
+    title: string;
+    desc: string;
+    src: string;
+  }>(null);
+
+  const openFullscreen = () => {
+    setFullscreenSlide(summarySlides[currentSlide]);
+  };
+
+  const closeFullscreen = () => {
+    setFullscreenSlide(null);
+  };
+
+  const goPreviousSlide = () => {
+    setCurrentSlide((prev) => {
+      const next = prev === 0 ? summarySlides.length - 1 : prev - 1;
+      if (fullscreenSlide) setFullscreenSlide(summarySlides[next]);
+      return next;
+    });
+  };
+
+  const goNextSlide = () => {
+    setCurrentSlide((prev) => {
+      const next = prev === summarySlides.length - 1 ? 0 : prev + 1;
+      if (fullscreenSlide) setFullscreenSlide(summarySlides[next]);
+      return next;
+    });
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        goPreviousSlide();
+      }
+
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        goNextSlide();
+      }
+
+      if (e.key === 'f' || e.key === 'F') {
+        e.preventDefault();
+        if (fullscreenSlide) closeFullscreen();
+        else openFullscreen();
+      }
+
+      if (e.key === 'Escape') {
+        closeFullscreen();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [fullscreenSlide, currentSlide]);
+
+  const activeSlide = summarySlides[currentSlide];
+
   return (
     <div className="page-enter">
       <PageHero
@@ -153,6 +236,91 @@ export default function Environnement() {
       />
 
       <div className="section-divider" />
+
+            <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '4rem 1.5rem 5rem' }}>
+        <SectionHeader
+          tag="Support de présentation"
+          /*title="Diapositive de synthèse"*/
+          /*subtitle="← / → : changer de diapo · F : plein écran · Échap : quitter"*/
+          centered
+        />
+
+        <div
+          style={{
+            background: '#0F1A0B',
+            border: '1px solid rgba(245,158,11,0.12)',
+            borderRadius: '16px',
+            overflow: 'hidden',
+            boxShadow: '0 20px 60px rgba(0,0,0,0.18)',
+          }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              gap: '1rem',
+              padding: '1rem 1.25rem',
+              borderBottom: '1px solid rgba(245,158,11,0.08)',
+              background: 'rgba(245,158,11,0.04)',
+            }}
+          >
+            <div>
+              <div style={{ color: '#F0FDF4', fontWeight: 700, fontSize: '1rem', marginBottom: '0.2rem' }}>
+                {activeSlide.title}
+              </div>
+              <div style={{ color: '#A7C9A0', fontSize: '0.82rem' }}>
+                {activeSlide.desc}
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0 }}>
+              <button onClick={goPreviousSlide} style={navButtonStyle}>
+                <ChevronLeft size={18} />
+              </button>
+
+              <div style={{ color: '#F59E0B', fontWeight: 700, fontSize: '0.85rem', minWidth: 48, textAlign: 'center' }}>
+                {currentSlide + 1} / {summarySlides.length}
+              </div>
+
+              <button onClick={goNextSlide} style={navButtonStyle}>
+                <ChevronRight size={18} />
+              </button>
+
+              <button onClick={openFullscreen} style={navButtonStyle}>
+                <Maximize2 size={16} />
+              </button>
+            </div>
+          </div>
+
+          <button
+            onClick={openFullscreen}
+            style={{
+              width: '100%',
+              padding: 0,
+              border: 'none',
+              background: '#111A0F',
+              cursor: 'pointer',
+              display: 'block',
+            }}
+          >
+            <div style={{ aspectRatio: '16 / 9', background: '#111A0F' }}>
+              <img
+                src={activeSlide.src}
+                alt={activeSlide.title}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'contain',
+                  display: 'block',
+                }}
+              />
+            </div>
+          </button>
+        </div>
+      </section>
+
+      <div className="section-divider" style={{ maxWidth: '1280px', margin: '0 auto' }} />
 
       <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '5rem 1.5rem' }}>
         <SectionHeader
@@ -341,6 +509,92 @@ export default function Environnement() {
         />
       </section>
 
+            {fullscreenSlide && (
+        <div
+          onClick={closeFullscreen}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(0,0,0,0.88)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: 0,
+            zIndex: 9999,
+            backdropFilter: 'blur(4px)',
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              width: 'min(1400px, 96vw)',
+              height: '100vh',
+              background: '#0F1A0B',
+              border: '1px solid rgba(245,158,11,0.18)',
+              borderRadius: '16px',
+              overflow: 'hidden',
+              boxShadow: '0 24px 80px rgba(0,0,0,0.45)',
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: '1rem',
+                padding: '1rem 1.1rem',
+                borderBottom: '1px solid rgba(245,158,11,0.08)',
+              }}
+            >
+              <button onClick={goPreviousSlide} style={navButtonStyle}>
+                <ChevronLeft size={18} />
+              </button>
+
+              <div style={{ flex: 1 }}>
+                <div style={{ color: '#F0FDF4', fontWeight: 700, fontSize: '1rem', marginBottom: '0.2rem' }}>
+                  {fullscreenSlide.title}
+                </div>
+                <div style={{ color: '#A7C9A0', fontSize: '0.82rem' }}>
+                  {fullscreenSlide.desc} · {currentSlide + 1} / {summarySlides.length}
+                </div>
+              </div>
+
+              <button onClick={goNextSlide} style={navButtonStyle}>
+                <ChevronRight size={18} />
+              </button>
+
+              <button onClick={closeFullscreen} style={navButtonStyle}>
+                <X size={18} />
+              </button>
+            </div>
+
+            <div
+              style={{
+                background: '#111A0F',
+                height: 'calc(100vh - 84px)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                overflow: 'hidden',
+              }}
+            >
+              <img
+                src={fullscreenSlide.src}
+                alt={fullscreenSlide.title}
+                style={{
+                  maxWidth: '100%',
+                  maxHeight: '100%',
+                  objectFit: 'contain',
+                  display: 'block',
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
       <section
         style={{
           background: 'linear-gradient(135deg, rgba(74,222,128,0.06) 0%, rgba(245,158,11,0.04) 100%)',
@@ -383,3 +637,15 @@ export default function Environnement() {
     </div>
   );
 }
+const navButtonStyle = {
+  width: 38,
+  height: 38,
+  borderRadius: '999px',
+  border: '1px solid rgba(245,158,11,0.16)',
+  background: 'rgba(245,158,11,0.06)',
+  color: '#F0FDF4',
+  cursor: 'pointer',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+} as const;
