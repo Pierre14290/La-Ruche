@@ -19,12 +19,7 @@ const summarySlides = [
   {
     /*title: 'Synthèse des enjeux',*/
     /*desc: 'Slide de résumé pour introduire la page Enjeux.',*/
-    src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1777468018/Capture_d_%C3%A9cran_2026-04-29_150452_r1tbsz.png',
-  },
-  {
-    title: 'Problématique logement + mobilité',
-    desc: 'Slide complémentaire sur le lien entre logement, parking et mobilité subie.',
-    src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1777468102/Capture_d_%C3%A9cran_2026-04-29_150810_rvjjrr.png',
+    src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1777497647/Capture_d_%C3%A9cran_2026-04-29_232037_jaktwm.png',
   },
 ];
 
