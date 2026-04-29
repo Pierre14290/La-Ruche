@@ -528,7 +528,7 @@ export default function Enjeux() {
             onClick={(e) => e.stopPropagation()}
             style={{
               width: 'min(1400px, 96vw)',
-              maxHeight: '94vh',
+              maxHeight: '100vh',
               background: '#0F1A0B',
               border: '1px solid rgba(245,158,11,0.18)',
               borderRadius: '16px',
@@ -568,7 +568,7 @@ export default function Enjeux() {
               </button>
             </div>
 
-            <div style={{ background: '#111A0F', maxHeight: 'calc(94vh - 84px)', overflow: 'auto' }}>
+            <div style={{ background: '#111A0F', maxHeight: 'calc(100vh - 84px)', overflow: 'auto' }}>
               <img
                 src={fullscreenSlide.src}
                 alt={fullscreenSlide.title}
