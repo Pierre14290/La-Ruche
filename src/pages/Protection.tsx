@@ -20,14 +20,9 @@ import StatGrid from '../components/StatGrid';
 
 const summarySlides = [
   {
-    title: 'Synthèse protection intellectuelle',
-    desc: 'Slide de résumé pour présenter les éléments protégeables et la stratégie retenue.',
-    src: 'LIEN_DIAPO_PROTECTION_1',
-  },
-  {
-    title: 'Stratégie formelle et informelle',
-    desc: 'Slide complémentaire sur les outils juridiques, les contrats et la protection par l’innovation continue.',
-    src: 'LIEN_DIAPO_PROTECTION_2',
+    /*title: 'Synthèse protection intellectuelle',*/
+    /*desc: 'Slide de résumé pour présenter les éléments protégeables et la stratégie retenue.',*/
+    src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1777505357/Capture_d_%C3%A9cran_2026-04-29_232643_lh67am.png',
   },
 ];
 
@@ -244,8 +239,8 @@ export default function Protection() {
       <section style={{ maxWidth: '1280px', margin: '0 auto', padding: '4rem 1.5rem 5rem' }}>
         <SectionHeader
           tag="Support de présentation"
-          title="Diapositive de synthèse"
-          subtitle="← / → : changer de diapo · F : plein écran · Échap : quitter"
+          /*title="Diapositive de synthèse"*/
+          /*subtitle="← / → : changer de diapo · F : plein écran · Échap : quitter"*/
           centered
         />
 
