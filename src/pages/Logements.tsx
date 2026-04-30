@@ -21,17 +21,26 @@ const summarySlides = [
   {
     /*title: 'Synthèse des logements',*/
     /*desc: 'Slide de résumé pour présenter les logements, l’aménagement et le choix du conteneur 40 pieds.',*/
+    type: 'image',
     src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1777530559/Capture_d_%C3%A9cran_2026-04-30_082804_bghrd5.png',
   },
   {
     /*title: 'Thermique et énergie',*/
     /*desc: 'Slide complémentaire sur les déperditions, la PAC, le bilan énergétique et le champ photovoltaïque.',*/
-    src: 'LIEN_DIAPO_LOGEMENTS_2',
+    type: 'video',
+    src: 'https://res.cloudinary.com/dgsvjcdfk/video/upload/v1777530265/Vid%C3%A9o_maquette_v3.0_pvgikm.mp4',
   },
   {
     /*title: 'Thermique et énergie',*/
     /*desc: 'Slide complémentaire sur les déperditions, la PAC, le bilan énergétique et le champ photovoltaïque.',*/
+    type: 'image',
     src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1777530563/Capture_d_%C3%A9cran_2026-04-30_082811_xozaki.png',
+  },
+  {
+    /*title: 'Thermique et énergie',*/
+    /*desc: 'Slide complémentaire sur les déperditions, la PAC, le bilan énergétique et le champ photovoltaïque.',*/
+    type: 'video',
+    src: 'https://res.cloudinary.com/dgsvjcdfk/video/upload/v1777529446/Enregistrement_2026-04-29_154521_kttowh.mp4',
   },
 ];
 
@@ -281,11 +290,7 @@ const pvImage = {
 
 export default function Logements() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [fullscreenSlide, setFullscreenSlide] = useState<null | {
-    title: string;
-    desc: string;
-    src: string;
-  }>(null);
+  const [fullscreenSlide, setFullscreenSlide] = useState<null | typeof summarySlides[number]>(null);
 
   const [selectedImage, setSelectedImage] = useState<null | {
     title: string;
@@ -426,16 +431,31 @@ export default function Logements() {
             }}
           >
             <div style={{ aspectRatio: '16 / 9', background: '#111A0F' }}>
-              <img
-                src={activeSlide.src}
-                alt={activeSlide.title}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'contain',
-                  display: 'block',
-                }}
-              />
+              {activeSlide.type === 'video' ? (
+  <video
+    src={activeSlide.src}
+    controls
+    muted
+    playsInline
+    style={{
+      width: '100%',
+      height: '100%',
+      objectFit: 'contain',
+      display: 'block',
+    }}
+  />
+) : (
+  <img
+    src={activeSlide.src}
+    alt=""
+    style={{
+      width: '100%',
+      height: '100%',
+      objectFit: 'contain',
+      display: 'block',
+    }}
+  />
+)}
             </div>
           </button>
         </div>
@@ -1160,15 +1180,32 @@ export default function Logements() {
             </div>
 
             <div style={{ background: '#111A0F', maxHeight: 'calc(94vh - 84px)', overflow: 'auto' }}>
-              <img
-                src={fullscreenSlide.src}
-                alt={fullscreenSlide.title}
-                style={{
-                  width: '100%',
-                  height: 'auto',
-                  display: 'block',
-                }}
-              />
+              {fullscreenSlide.type === 'video' ? (
+  <video
+    src={fullscreenSlide.src}
+    controls
+    autoPlay
+    muted
+    playsInline
+    style={{
+      maxWidth: '100%',
+      maxHeight: '100%',
+      objectFit: 'contain',
+      display: 'block',
+    }}
+  />
+) : (
+  <img
+    src={fullscreenSlide.src}
+    alt=""
+    style={{
+      maxWidth: '100%',
+      maxHeight: '100%',
+      objectFit: 'contain',
+      display: 'block',
+    }}
+  />
+)}
             </div>
           </div>
         </div>
