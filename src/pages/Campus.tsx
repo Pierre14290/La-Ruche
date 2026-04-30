@@ -28,6 +28,11 @@ const summarySlides = [
     /*desc: 'Slide complémentaire sur le pavage, les modules et la logique d’extension.',*/
     src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1777501917/Capture_d_%C3%A9cran_2026-04-30_003059_ky3aev.png',
   },
+  {
+    /*title: 'Organisation modulaire',*/
+    /*desc: 'Slide complémentaire sur le pavage, les modules et la logique d’extension.',*/
+    src: 'https://res.cloudinary.com/dgsvjcdfk/video/upload/v1777529446/Enregistrement_2026-04-29_154521_kttowh.mp4',
+  },
 ];
 
 const moduleTypes = [
