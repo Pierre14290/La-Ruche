@@ -21,12 +21,17 @@ const summarySlides = [
   {
     /*title: 'Synthèse des logements',*/
     /*desc: 'Slide de résumé pour présenter les logements, l’aménagement et le choix du conteneur 40 pieds.',*/
-    src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1777502254/Capture_d_%C3%A9cran_2026-04-29_232549_kbgibu.png',
+    src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1777530559/Capture_d_%C3%A9cran_2026-04-30_082804_bghrd5.png',
   },
   {
     /*title: 'Thermique et énergie',*/
     /*desc: 'Slide complémentaire sur les déperditions, la PAC, le bilan énergétique et le champ photovoltaïque.',*/
     src: 'LIEN_DIAPO_LOGEMENTS_2',
+  },
+  {
+    /*title: 'Thermique et énergie',*/
+    /*desc: 'Slide complémentaire sur les déperditions, la PAC, le bilan énergétique et le champ photovoltaïque.',*/
+    src: 'https://res.cloudinary.com/dgsvjcdfk/image/upload/v1777530563/Capture_d_%C3%A9cran_2026-04-30_082811_xozaki.png',
   },
 ];
 
